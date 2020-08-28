@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.OPQSDK", "Traceless.OPQSDK\Traceless.OPQSDK.csproj", "{3F739B65-F282-4214-BA32-9B0966700245}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.SocketIO", "Traceless.SocketIO\Traceless.SocketIO.csproj", "{31F16988-942A-4437-AB11-82A8FCE33F6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.Utils", "Traceless.Utils\Traceless.Utils.csproj", "{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traceless.Robot", "Traceless.Robot\Traceless.Robot.csproj", "{B67190B4-8E01-4744-A5BA-246FC4447BE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F739B65-F282-4214-BA32-9B0966700245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F739B65-F282-4214-BA32-9B0966700245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F739B65-F282-4214-BA32-9B0966700245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F739B65-F282-4214-BA32-9B0966700245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F16988-942A-4437-AB11-82A8FCE33F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F16988-942A-4437-AB11-82A8FCE33F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F16988-942A-4437-AB11-82A8FCE33F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F16988-942A-4437-AB11-82A8FCE33F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67190B4-8E01-4744-A5BA-246FC4447BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67190B4-8E01-4744-A5BA-246FC4447BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67190B4-8E01-4744-A5BA-246FC4447BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67190B4-8E01-4744-A5BA-246FC4447BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4263E56D-8286-4A7B-9504-C50A57F3A1D1}
+	EndGlobalSection
+EndGlobal
