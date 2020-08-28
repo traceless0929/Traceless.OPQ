@@ -7,6 +7,27 @@ OPQ C# SDK 【netcore 3.1】
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
 
+#### 开发
+
+##### 方法一：clone
+
+1. clone本库
+
+2. 复制Traceless.Robot.Plugins.MyPlugin并更改插件名，修改插件信息
+
+3. 在事件中完成逻辑开发
+
+4. 完成
+
+##### 方法二：dll引用
+
+1. 下载release并解压获取三个dll
+2. 新建项目并引用所有dll
+3. 添加app.config并配置
+4. 参考Traceless.Robot.Program进行socket对接
+5. 进行逻辑开发
+6. 完成
+
 #### 使用
 
 1. 配置App.config，设置OPQ地址及机器人QQ
