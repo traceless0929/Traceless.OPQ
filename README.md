@@ -12,6 +12,16 @@ OPQ C# SDK 【netcore 3.1】
 3. 多插件支持-消息拦截
 4. ...
 
+#### 项目结构
+
+Traceless.OPQSDK：SDK本体，不做二次开发无需修改，SDK更新替换即可
+
+Traceless.SocketIO：基于Websocket4Net的Socket.io实现【用于连接socket接收事件】
+
+Traceless.Utils：一些工具方法【内置HttpclientFactory的控制台使用实现】，会持续添加
+
+Traceless.Robot：SDK开发模板，除了plugins下的文件，其他的需要复制到自己的项目中
+
 
 
 ##### Api支持【持续更新中】
