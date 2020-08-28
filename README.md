@@ -5,6 +5,8 @@ OPQ C# SDK 【netcore 3.1】
 
 [WIKI点击进入](https://github.com/OPQBOT/OPQ/wiki)
 
+我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
+
 #### 使用
 
 1. 配置App.config，设置OPQ地址及机器人QQ
