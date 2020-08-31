@@ -45,6 +45,7 @@ namespace Traceless.Robot.Plugins
             {
                 Api.SendGroupMsg(msg.FromGroupId, msg.Content, "", "");
             }
+            Api.RevokeMsg(new OPQSDK.Models.Api.RevokeMsgReq { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
             return 0;
         }
 

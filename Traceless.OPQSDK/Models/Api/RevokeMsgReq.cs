@@ -12,7 +12,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群号
         /// </summary>
-        public int GroupID { get; set; }
+        public long GroupID { get; set; }
 
         /// <summary>
         /// 群消息中的MsgSeq
