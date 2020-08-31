@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Traceless.OPQSDK
 {
@@ -80,6 +81,70 @@ namespace Traceless.OPQSDK
                 req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
             }
             return SendMsg(req);
+        }
+
+        /// <summary>
+        /// 群组管理：加群 拉人 踢群 退群
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static object GroupMgr(GroupMgrReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=GroupMgr", req);
+        }
+
+        /// <summary>
+        /// 添加好友
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static object AddQQUser(AddQQReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=AddQQUser", req);
+        }
+
+        /// <summary>
+        /// 获取好友列表【建议缓存结果，过一段时间再调用】
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static List<Friendlist> GetQQFriendList()
+        {
+            List<Friendlist> res = new List<Friendlist>();
+            FriendListReq req = new FriendListReq();
+            FriendListResp friend = new FriendListResp();
+            do
+            {
+                friend = Post<FriendListResp>(_ApiAddress + "&funcname=GetQQUserList", req);
+                res.AddRange(friend.Friendlist.GroupBy(p => p.FriendUin).Select(p => p.First()).ToList());
+                req.StartIndex = friend.StartIndex;
+            }
+            while (friend.Totoal_friend_count != res.Count || friend.StartIndex != friend.Friend_count);
+            //返回json中 StartIndex == Friend_count 说明拉取好友列表完毕 否则 传入StartIndex 继续请求
+            return res;
+        }
+
+        /// <summary>
+        /// 获取群组列表【建议缓存结果，过一段时间再调用】
+        /// </summary>
+        /// <returns></returns>
+        public static List<Trooplist> GetGroupList()
+        {
+            GroupListReq req = new GroupListReq();
+            List<Trooplist> res = new List<Trooplist>();
+            GroupListResp group = new GroupListResp();
+            do
+            {
+                group = Post<GroupListResp>(_ApiAddress + "&funcname=GetGroupList", req);
+                if (group.TroopList != null)
+                {
+                    res.AddRange(group.TroopList.GroupBy(p => p.GroupId).Select(p => p.First()).ToList());
+                }
+                req.NextToken = group.NextToken;
+            }
+            while (group.NextToken.Length < 1 || group.TroopList != null);
+            //首次请求 {“NextToken”:""} 第二次请求NextToken 请填值 返回json 中 TroopList==null 时说明拉取群列表完成
+            return res;
         }
 
         /// <summary>
