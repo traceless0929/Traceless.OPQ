@@ -28,13 +28,13 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendGroupMsg(long groupId, string txt = "", string voice = "", string pic = "", long atUser = 0)
+        public static MsgResp SendGroupMsg(long groupId, string txt = "", string voice = "", string pic = "")
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
-            SendMsgReq req = new SendMsgReq() { toUser = groupId, sendMsgType = "TextMsg", sendToType = 2, content = (txt == null ? "" : txt), atUser = atUser };
+            SendMsgReq req = new SendMsgReq() { toUser = groupId, sendMsgType = "TextMsg", sendToType = 2, content = (txt == null ? "" : txt) };
             if (!string.IsNullOrEmpty(voice))
             {
                 req.content = "";

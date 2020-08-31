@@ -43,7 +43,7 @@ namespace Traceless.Robot.Plugins
             }
             else
             {
-                Api.SendGroupMsg(msg.FromGroupId, msg.Content, "", "", msg.FromUserId);
+                Api.SendGroupMsg(msg.FromGroupId, msg.Content, "", "");
             }
             return 0;
         }
