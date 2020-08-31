@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Traceless.OPQSDK.Models.Content;
-
 namespace Traceless.OPQSDK.Models
 {
     public class BaseData<T> where T : class
