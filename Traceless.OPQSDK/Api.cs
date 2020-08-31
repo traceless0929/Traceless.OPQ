@@ -119,7 +119,7 @@ namespace Traceless.OPQSDK
                 res.AddRange(friend.Friendlist.GroupBy(p => p.FriendUin).Select(p => p.First()).ToList());
                 req.StartIndex = friend.StartIndex;
             }
-            while (friend.Totoal_friend_count != res.Count || friend.StartIndex != friend.Friend_count);
+            while (friend.Totoal_friend_count != res.Count && friend.StartIndex != friend.Friend_count);
             //返回json中 StartIndex == Friend_count 说明拉取好友列表完毕 否则 传入StartIndex 继续请求
             return res;
         }
@@ -142,7 +142,7 @@ namespace Traceless.OPQSDK
                 }
                 req.NextToken = group.NextToken;
             }
-            while (group.NextToken.Length < 1 || group.TroopList != null);
+            while (group.NextToken.Length > 1 && group.TroopList != null);
             //首次请求 {“NextToken”:""} 第二次请求NextToken 请填值 返回json 中 TroopList==null 时说明拉取群列表完成
             return res;
         }
