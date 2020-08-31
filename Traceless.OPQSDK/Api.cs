@@ -148,6 +148,16 @@ namespace Traceless.OPQSDK
         }
 
         /// <summary>
+        /// 撤回消息
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static object RevokeMsg(RevokeMsgReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=RevokeMsg", req);
+        }
+
+        /// <summary>
         /// 发消息
         /// </summary>
         /// <param name="req"></param>
