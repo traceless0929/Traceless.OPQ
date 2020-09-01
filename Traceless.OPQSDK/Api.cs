@@ -29,7 +29,7 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendGroupMsg(long groupId, string txt = "", string voice = "", string pic = "")
+        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "")
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
@@ -60,7 +60,7 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendFriendMsg(long qq, string txt = "", string voice = "", string pic = "")
+        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "")
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
