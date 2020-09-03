@@ -3,6 +3,8 @@ OPQ C# SDK 【netcore 3.1】
 
 这里是Netcore 3.1 OPQ C# SDK
 
+![.NET Core](https://github.com/traceless0929/Traceless.OPQ/workflows/.NET%20Core/badge.svg)
+
 [WIKI点击进入](https://github.com/OPQBOT/OPQ/wiki)
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
