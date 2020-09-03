@@ -21,7 +21,7 @@ OPQ C# SDK 【netcore 3.1】
 
 #### 使用
 
-1. 配置App.config，设置OPQ地址及机器人QQ
+1. 配置App.config，设置OPQ地址及机器人QQ【你也可以直接修改运行目录下的<程序集名称>.config文件】
 2. 编译【自己选择平台，理论上netcore支持的平台，SDK也都支持（艹那不是全平台了么）】
 3. 发布【发布到对应机器上】
 4. 启动【启动对应平台文件 win可直接支持exe，linux需安装dotnet环境 使用dotnet命令启动，当然如果带着依赖的独立包的话，就不需要dotnet环境了】
