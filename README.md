@@ -29,16 +29,9 @@ Install-Package Traceless.OPQSDK -Version 0.0.5
 
 #### 开发【使用Nuget】
 1. 新建项目
-
 2. Nuget引用Traceless.OPQSDK
-
 3. 在程序某处添加代码  **await OPQSDK.Plugin.OPQMain.Client();**
-
-4. 创建<项目命名空间>.Plugins.<你的插件Class名称>，如
-
-   [MyPlugin]: https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs
-
-   
+4. 创建<项目命名空间>.Plugins.<你的插件Class名称>，如[MyPlugin](https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs)
 
 5. 在事件中完成逻辑开发
 
