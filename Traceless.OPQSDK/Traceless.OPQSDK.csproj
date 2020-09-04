@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>Traceless.OPQSDK</PackageId>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <Authors>Traceless</Authors>
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore</PackageDescription>
@@ -13,9 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Traceless.Utils\Traceless.Utils.csproj" />
+    <PackageReference Include="Traceless.Utils" Version="0.0.1" />
   </ItemGroup>
 </Project>

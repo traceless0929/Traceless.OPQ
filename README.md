@@ -9,15 +9,32 @@ OPQ C# SDK 【netcore 3.1】
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
 
-#### 开发
+
+
+Nuget
+
+```powershell
+//SDK模块
+Install-Package Traceless.OPQSDK -Version 0.0.3
+//SocketIO模块-用于连接OPQ核心进行事件回调监听
+Install-Package Traceless.SocketIO -Version 0.0.1
+```
+
+
+
+#### 开发【直接使用本库】
 
 1. clone本库
-
 2. 复制Traceless.Robot.Plugins.MyPlugin并更改插件名，修改插件信息
-
 3. 在事件中完成逻辑开发
-
 4. 完成
+
+#### 开发【使用Nuget】
+1.新建项目
+2.Nuget引用Traceless.OPQSDK
+3.Nuget引用Traceless.SocketIO 参考Traceless.Robot接入事件监听
+4.在事件中完成逻辑开发
+5.完成
 
 #### 使用
 

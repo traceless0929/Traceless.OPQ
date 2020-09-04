@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,11 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Traceless.OPQSDK" Version="0.0.3" />
+    <PackageReference Include="Traceless.SocketIO" Version="0.0.1" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Traceless.OPQSDK\Traceless.OPQSDK.csproj" />
-    <ProjectReference Include="..\Traceless.SocketIO\Traceless.SocketIO.csproj" />
-  </ItemGroup>
-
 </Project>
