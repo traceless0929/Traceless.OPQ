@@ -72,8 +72,18 @@ namespace Traceless.OPQSDK.Models.Event
         public string ActionGroupCard { get; set; }
 
         /// <summary>
-        /// --11 agree 14 忽略 12/21 disagree
+        /// --11 同意 14 忽略 21 拒绝
         /// </summary>
         public int Action { get; set; }
+
+        /// <summary>
+        /// 处理群邀请
+        /// </summary>
+        /// <param name="action">11同意 14忽略 21拒绝</param>
+        public void DealReq(int action)
+        {
+            this.Action = action;
+            Apis.AnswerInviteGroup(this);
+        }
     }
 }

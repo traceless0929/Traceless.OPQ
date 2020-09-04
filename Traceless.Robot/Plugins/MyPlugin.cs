@@ -34,18 +34,18 @@ namespace Traceless.Robot.Plugins
             if (msg.MsgType == MsgType.PicMsg)
             {
                 PicContent picContent = msg.GetPic();
-                Api.SendGroupMsg(msg.FromGroupId, picContent.Content, picContent.GroupPic.FirstOrDefault().Url);
+                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content, picContent.GroupPic.FirstOrDefault().Url);
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
                 VoiceContent voiceContent = msg.GetVoice();
-                Api.SendGroupMsg(msg.FromGroupId, voiceContent.Content, "", voiceContent.Url);
+                Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content, "", voiceContent.Url);
             }
             else
             {
-                Api.SendGroupMsg(msg.FromGroupId, msg.Content);
+                Apis.SendGroupMsg(msg.FromGroupId, msg.Content);
             }
-            Api.RevokeMsg(new OPQSDK.Models.Api.RevokeMsgReq { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
+            Apis.RevokeMsg(new OPQSDK.Models.Api.RevokeMsgReq { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
             return 0;
         }
 
@@ -60,16 +60,16 @@ namespace Traceless.Robot.Plugins
             if (msg.MsgType == MsgType.PicMsg)
             {
                 PicContent picContent = msg.GetPic();
-                Api.SendFriendMsg(msg.FromUin, picContent.Content, picContent.FriendPic.FirstOrDefault().Url);
+                Apis.SendFriendMsg(msg.FromUin, picContent.Content, picContent.FriendPic.FirstOrDefault().Url);
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
                 VoiceContent voiceContent = msg.GetVoice();
-                Api.SendFriendMsg(msg.FromUin, voiceContent.Content, "", voiceContent.Url);
+                Apis.SendFriendMsg(msg.FromUin, voiceContent.Content, "", voiceContent.Url);
             }
             else
             {
-                Api.SendFriendMsg(msg.FromUin, msg.Content);
+                Apis.SendFriendMsg(msg.FromUin, msg.Content);
             }
 
             return 0;

@@ -64,6 +64,18 @@ namespace Traceless.Robot
                         await Client();
                         return;
                     }
+                    else
+                    {
+                        string masterQQ = System.Configuration.ConfigurationManager.AppSettings["masterqq"];
+                        if (null == masterQQ || masterQQ.Length < 1)
+                        {
+                            Console.WriteLine(string.Format("没有配置主人QQ，不发送成功启动通知"));
+                        }
+                        else
+                        {
+                            OPQSDK.Apis.SendFriendMsg(Convert.ToInt64(masterQQ), $"启动成功..");
+                        }
+                    }
                 }
               );
             });

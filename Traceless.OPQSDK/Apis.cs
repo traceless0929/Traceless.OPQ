@@ -7,15 +7,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Traceless.OPQSDK.Models.Event;
+using Traceless.OPQSDK.Models;
 
 namespace Traceless.OPQSDK
 {
-    public class Api
+    public class Apis
     {
         private static string _ApiAddress = "";
         private static string _RobotQQ = "";
 
-        static Api()
+        static Apis()
         {
             _RobotQQ = System.Configuration.ConfigurationManager.AppSettings["robotqq"];
             _ApiAddress = System.Configuration.ConfigurationManager.AppSettings["address"] + "v1/LuaApiCaller?qq=" + _RobotQQ + "&timeout=10";
@@ -115,7 +117,7 @@ namespace Traceless.OPQSDK
             FriendListResp friend = new FriendListResp();
             do
             {
-                friend = Post<FriendListResp>(_ApiAddress + "&funcname=GetQQUserList", req);
+                friend = Post<FriendListResp>(_ApiAddress + "&funcname=GetFriendListReq", req);
                 res.AddRange(friend.Friendlist.GroupBy(p => p.FriendUin).Select(p => p.First()).ToList());
                 req.StartIndex = friend.StartIndex;
             }
@@ -135,7 +137,7 @@ namespace Traceless.OPQSDK
             GroupListResp group = new GroupListResp();
             do
             {
-                group = Post<GroupListResp>(_ApiAddress + "&funcname=GetGroupList", req);
+                group = Post<GroupListResp>(_ApiAddress + "&funcname=GetTroopListReqV2", req);
                 if (group.TroopList != null)
                 {
                     res.AddRange(group.TroopList.GroupBy(p => p.GroupId).Select(p => p.First()).ToList());
@@ -148,13 +150,142 @@ namespace Traceless.OPQSDK
         }
 
         /// <summary>
+        /// 获群成员列表【建议缓存结果，过一段时间再调用】
+        /// </summary>
+        /// <returns></returns>
+        public static List<Memberlist> GetGroupUserList(long gid)
+        {
+            GroupUserListReq req = new GroupUserListReq() { GroupUin = gid };
+            List<Memberlist> res = new List<Memberlist>();
+            GroupUserListResp group = new GroupUserListResp();
+            do
+            {
+                group = Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req);
+                res.AddRange(group.MemberList);
+                req.LastUin = group.LastUin;
+            }
+            while (group.LastUin != 0);
+            return res.GroupBy(p => p.MemberUin).Select(p => p.First()).ToList();
+        }
+
+        /// <summary>
         /// 撤回消息
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
         public static object RevokeMsg(RevokeMsgReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=RevokeMsg", req);
+            return Post<object>(_ApiAddress + "&funcname=PbMessageSvc.PbMsgWithDraw", req);
+        }
+
+        /// <summary>
+        /// 搜索群组
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static List<GroupSearchItemResp> SearchGroup(GroupSearchReq req)
+        {
+            return Post<List<GroupSearchItemResp>>(_ApiAddress + "&funcname=OidbSvc.0x8ba_31", req);
+        }
+
+        /// <summary>
+        /// QQ资料卡点赞
+        /// </summary>
+        /// <returns></returns>
+        public static object QQZan(long qq)
+        {
+            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x7e5_4", new QQZanReq() { UserID = qq });
+        }
+
+        /// <summary>
+        /// 获取QQ相关ck
+        /// </summary>
+        /// <returns></returns>
+        public static QQCkResp GetQQCk()
+        {
+            return Get<QQCkResp>(_ApiAddress + "&funcname=GetUserCook");
+        }
+
+        /// <summary>
+        /// 处理好友请求
+        /// </summary>
+        /// <returns></returns>
+        public static object DealFriend(FriendAddReqArgs arg)
+        {
+            return Post<object>(_ApiAddress + "&funcname=DealFriend", arg);
+        }
+
+        /// <summary>
+        /// 处理群邀请
+        /// </summary>
+        /// <returns></returns>
+        public static object AnswerInviteGroup(GroupInviteArgs arg)
+        {
+            return Post<object>(_ApiAddress + "&funcname=AnswerInviteGroup", arg);
+        }
+
+        /// <summary>
+        /// 打开红包[暂时无效]
+        /// </summary>
+        /// <returns></returns>
+        public static object OpenRedBag(RedPackInfo arg)
+        {
+            return Post<object>(_ApiAddress + "&funcname=OpenRedBag", arg);
+        }
+
+        /// <summary>
+        /// 修改群名片
+        /// </summary>
+        /// <returns></returns>
+        public static object ModifyGroupCard(SetGroupCardReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=friendlist.ModifyGroupCardReq", req);
+        }
+
+        /// <summary>
+        /// 设置头衔
+        /// </summary>
+        /// <returns></returns>
+        public static object SetUniqueTitle(SetGroupTitleReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x8fc_2", req);
+        }
+
+        /// <summary>
+        /// 发送公告
+        /// </summary>
+        /// <returns></returns>
+        public static object Announce(SendGNoticeReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=Announce", req);
+        }
+
+        /// <summary>
+        /// 全员禁言
+        /// </summary>
+        /// <returns></returns>
+        public static object BanAllGroup(BanAllReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x89a_0", req);
+        }
+
+        /// <summary>
+        /// 禁言某人
+        /// </summary>
+        /// <returns></returns>
+        public static object Ban(BanReq req)
+        {
+            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x570_8", req);
+        }
+
+        /// <summary>
+        /// 获取任意用户信息昵称头像等
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
+        public static UserInfoResp GetUserInfo(long qq)
+        {
+            return Post<UserInfoResp>(_ApiAddress + "&funcname=GetUserInfo", new QQZanReq() { UserID = qq });
         }
 
         /// <summary>

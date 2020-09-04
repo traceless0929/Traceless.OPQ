@@ -43,5 +43,15 @@ namespace Traceless.OPQSDK.Models.Event
         /// Action1忽略2同意3拒绝
         /// </summary>
         public int Action { get; set; }
+
+        /// <summary>
+        /// 处理好友请求
+        /// </summary>
+        /// <param name="action">1忽略2同意3拒绝</param>
+        public void DealReq(int action)
+        {
+            this.Action = action;
+            Apis.DealFriend(this);
+        }
     }
 }

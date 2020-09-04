@@ -93,5 +93,16 @@ namespace Traceless.OPQSDK.Models
             }
             return Convert.ToDecimal(this.Tittle.Replace("元", "").Trim());
         }
+
+        /// <summary>
+        /// 打开红包
+        /// </summary>
+        public void Open()
+        {
+            if (!IsPay())
+            {
+                Apis.OpenRedBag(this);
+            }
+        }
     }
 }
