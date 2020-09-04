@@ -30,11 +30,11 @@ Install-Package Traceless.SocketIO -Version 0.0.1
 4. 完成
 
 #### 开发【使用Nuget】
-1.新建项目
-2.Nuget引用Traceless.OPQSDK
-3.Nuget引用Traceless.SocketIO 参考Traceless.Robot接入事件监听
-4.在事件中完成逻辑开发
-5.完成
+1. 新建项目
+2. Nuget引用Traceless.OPQSDK
+3. Nuget引用Traceless.SocketIO 参考Traceless.Robot接入事件监听
+4. 在事件中完成逻辑开发
+5. 完成
 
 #### 使用
 
@@ -58,7 +58,7 @@ Traceless.SocketIO：基于Websocket4Net的Socket.io实现【用于连接socket�
 
 Traceless.Utils：一些工具方法【内置HttpclientFactory的控制台使用实现】，会持续添加
 
-Traceless.Robot：SDK开发模板，除了plugins下的文件，其他的需要复制到自己的项目中
+Traceless.Robot：SDK主程序，集成了多插件管理、支持等，可以直接在这里开发，若新开发，除了plugins下的文件，其他的需要复制到自己的项目中
 
 
 
