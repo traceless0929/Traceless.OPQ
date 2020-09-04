@@ -28,7 +28,7 @@ namespace Traceless.OPQSDK.Plugin
             socket.Error += SocketError;
             socket.Connect();
 
-            foreach (var assembly in Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.IsAbstract && p.BaseType.Name == "BasePlugin")
+            foreach (var assembly in Assembly.GetEntryAssembly().GetTypes().Where(p => p.BaseType.IsAbstract && p.BaseType.Name == "BasePlugin")
                 .OrderByDescending(p => ((BasePlugin)Activator.CreateInstance(p)).PluginPriority))
             {
                 types.Add(assembly);
