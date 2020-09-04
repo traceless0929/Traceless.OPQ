@@ -8,7 +8,7 @@ using Traceless.OPQSDK.Models.Content;
 using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models.Msg;
 
-namespace Traceless.Robot.Plugins
+namespace Traceless.OPQSDK.Plugin
 {
     public abstract class BasePlugin
     {

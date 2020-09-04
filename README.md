@@ -15,9 +15,7 @@ Nuget
 
 ```powershell
 //SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.3
-//SocketIO模块-用于连接OPQ核心进行事件回调监听
-Install-Package Traceless.SocketIO -Version 0.0.1
+Install-Package Traceless.OPQSDK -Version 0.0.5
 ```
 
 

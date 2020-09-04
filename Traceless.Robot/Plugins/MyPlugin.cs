@@ -10,7 +10,7 @@ using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.Robot.Plugins
 {
-    public class MyPlugin : BasePlugin
+    public class MyPlugin : OPQSDK.Plugin.BasePlugin
     {
         public override string pluginName => "测试插件";
 
