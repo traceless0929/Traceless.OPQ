@@ -48,7 +48,7 @@ namespace Traceless.Robot.Plugins
             if (msg.MsgType == MsgType.PicMsg)
             {
                 PicContent picContent = msg.GetPic();
-                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content, picContent.GroupPic.FirstOrDefault().Url);
+                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content+CodeUtils.At(msg.FromUserId), picContent.GroupPic.FirstOrDefault().Url);
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
@@ -57,7 +57,7 @@ namespace Traceless.Robot.Plugins
             }
             else
             {
-                Apis.SendGroupMsg(msg.FromGroupId, msg.Content);
+                Apis.SendGroupMsg(msg.FromGroupId, msg.Content+ CodeUtils.At(msg.FromUserId));
             }
             Apis.RevokeMsg(new OPQSDK.Models.Api.RevokeMsgReq { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
             return 0;
