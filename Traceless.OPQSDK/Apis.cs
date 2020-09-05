@@ -286,7 +286,18 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         private static MsgResp SendMsg(SendMsgReq req)
         {
-            return Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+            MsgResp msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+            int i=0;
+            while(msg.Ret==241&&i<10){
+                System.Threading.Thread.Sleep(1100);
+                msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+                i++;
+            }
+            if(msg.Ret==241){
+                
+                Console.WriteLine($"[WARN]API调用过于频繁，本条丢弃{JsonConvert.SerializeObject(req)}");
+            }
+            return msg;
         }
 
         public static T Post<T>(string url, object data) where T : class
