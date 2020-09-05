@@ -10,23 +10,37 @@ using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.Robot.Plugins
 {
+    /// <summary>
+    /// 示例插件 所有事件若不想使用可以直接去除事件代码
+    /// </summary>
     public class MyPlugin : OPQSDK.Plugin.BasePlugin
     {
+        /// <summary>
+        /// 插件名
+        /// </summary>
         public override string pluginName => "测试插件";
-
+        /// <summary>
+        /// 插件作者
+        /// </summary>
         public override string pluginAuthor => "Traceless";
-
+        /// <summary>
+        /// 插件APPID
+        /// </summary>
         public override string AppId => "Traceless.Demo";
-
+        /// <summary>
+        /// 插件描述
+        /// </summary>
         public override string PluginDescription => "这是个demo";
-
+        /// <summary>
+        /// 插件优先级【越大越优先，优先级大的插件先被触发，若插件选择拦截消息，后面的插件将不会被触发群/私聊消息】
+        /// </summary>
         public override int PluginPriority => 9999;
 
         /// <summary>
         /// 群消息
         /// </summary>
         /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <returns>0不拦截 1拦截消息</returns>
         public static int GroupMsgProcess(GroupMsg msg, long CurrentQQ)
         {
             Console.WriteLine($"GroupMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
@@ -53,7 +67,7 @@ namespace Traceless.Robot.Plugins
         /// 私聊消息
         /// </summary>
         /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <returns>0不拦截 1拦截消息</returns>
         public static int FriendMsgProcess(FriendMsg msg, long CurrentQQ)
         {
             Console.WriteLine($"FriendMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
