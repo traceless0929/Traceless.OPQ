@@ -225,15 +225,6 @@ namespace Traceless.OPQSDK
         }
 
         /// <summary>
-        /// 打开红包[暂时无效]
-        /// </summary>
-        /// <returns></returns>
-        public static object OpenRedBag(RedPackInfo arg)
-        {
-            return Post<object>(_ApiAddress + "&funcname=OpenRedBag", arg);
-        }
-
-        /// <summary>
         /// 修改群名片
         /// </summary>
         /// <returns></returns>
