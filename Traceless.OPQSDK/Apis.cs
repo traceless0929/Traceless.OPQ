@@ -288,7 +288,8 @@ namespace Traceless.OPQSDK
         {
             MsgResp msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
             int i=0;
-            while(msg.Ret==241&&i<10){
+            while(msg.Ret==241&&i<5){
+                Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");
                 System.Threading.Thread.Sleep(1100);
                 msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
                 i++;
