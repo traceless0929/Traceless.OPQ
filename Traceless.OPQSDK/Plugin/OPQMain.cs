@@ -17,7 +17,7 @@ namespace Traceless.OPQSDK.Plugin
     public class OPQMain
     {
         public static Client socket;
-        private static ConcurrentBag<Type> types = new ConcurrentBag<Type>();
+        private static ConcurrentBag<BasePlugin> _instanceBag = new ConcurrentBag<BasePlugin>();
 
         public static async Task Client()
         {
@@ -31,12 +31,13 @@ namespace Traceless.OPQSDK.Plugin
             foreach (var assembly in Assembly.GetEntryAssembly().GetTypes().Where(p => p.BaseType.IsAbstract && p.BaseType.Name == "BasePlugin")
                 .OrderByDescending(p => ((BasePlugin)Activator.CreateInstance(p)).PluginPriority))
             {
-                types.Add(assembly);
-                BasePlugin basePlugin = (BasePlugin)Activator.CreateInstance(assembly);
+                object obj = Activator.CreateInstance(assembly);
+                BasePlugin basePlugin = (BasePlugin)obj;
+                _instanceBag.Add(basePlugin);
                 Console.WriteLine($"找到插件{assembly.Name}\n[{basePlugin.AppId}({basePlugin.pluginName})]\n优先级:{basePlugin.PluginPriority}\n作者：{basePlugin.pluginAuthor}\n描述：{basePlugin.PluginDescription}");
                 Console.WriteLine($"-------------------------------------");
             }
-            Console.WriteLine($"共{types.Count}个");
+            Console.WriteLine($"共{_instanceBag.Count}个");
 
             socket.On("connect", (fn) =>
             {
@@ -63,7 +64,11 @@ namespace Traceless.OPQSDK.Plugin
                         }
                         else
                         {
-                            OPQSDK.Apis.SendFriendMsg(Convert.ToInt64(masterQQ), $"启动成功..");
+                            Apis.SendFriendMsg(Convert.ToInt64(masterQQ), $"启动成功..");
+                            foreach (var instance in _instanceBag)
+                            {
+                                instance.PluginInit(Convert.ToInt64(System.Configuration.ConfigurationManager.AppSettings["robotqq"]));
+                            }
                         }
                     }
                 }
@@ -93,14 +98,9 @@ namespace Traceless.OPQSDK.Plugin
                      {
                          //拦截标记，0不拦截 1拦截
                          int stopFlag = 0;
-                         foreach (var type in types)
+                         foreach (var instance in _instanceBag)
                          {
-                             var method = type.GetMethod("GroupMsgProcess");
-                             if (method == null)
-                             {
-                                 continue;
-                             }
-                             stopFlag = (int)method.Invoke(null, new object[] { baseData.CurrentPacket.Data, baseData.CurrentQQ });
+                             stopFlag = instance.GroupMsgProcess(baseData.CurrentPacket.Data, baseData.CurrentQQ);
                              if (stopFlag > 0)
                              {
                                  break;
@@ -126,15 +126,11 @@ namespace Traceless.OPQSDK.Plugin
                         }
                         try
                         {
+                            //拦截标记，0不拦截 1拦截
                             int stopFlag = 0;
-                            foreach (var type in types)
+                            foreach (var instance in _instanceBag)
                             {
-                                var method = type.GetMethod("FriendMsgProcess");
-                                if (method == null)
-                                {
-                                    continue;
-                                }
-                                stopFlag = (int)method.Invoke(null, new object[] { baseData.CurrentPacket.Data, baseData.CurrentQQ });
+                                stopFlag = instance.FriendMsgProcess(baseData.CurrentPacket.Data, baseData.CurrentQQ);
                                 if (stopFlag > 0)
                                 {
                                     break;
@@ -158,76 +154,76 @@ namespace Traceless.OPQSDK.Plugin
                         BaseData<BaseEvent<object>> baseData = JsonConvert.DeserializeObject<BaseData<BaseEvent<object>>>(msgText);
                         try
                         {
-                            foreach (var type in types)
+                            foreach (var instance in _instanceBag)
                             {
                                 switch (baseData.CurrentPacket.Data.EventMsg.MsgType)
                                 {
                                     case EventType.ON_EVENT_QQ_LOGIN_SUCC:
-                                        DoEventCall(type, "EventQQLogin", new object[] { JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ });
+                                        instance.EventQQLogin(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
                                         break;
 
                                     case EventType.ON_EVENT_QQ_OFFLINE:
-                                        DoEventCall(type, "EventQQOffline", new object[] { JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ });
+                                        instance.EventQQOffline(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
                                         break;
 
                                     case EventType.ON_EVENT_QQ_NETWORK_CHANGE:
-                                        DoEventCall(type, "FramNetChange", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventFramNetChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_ADD_STATUS:
-                                        DoEventCall(type, "QQFriendAddRet", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqRetArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQFriendAddRet(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqRetArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_NOTIFY_PUSHADDFRD:
-                                        DoEventCall(type, "QQFriendAddPush", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddPushArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQFriendAddPush(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddPushArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_ADDED:
-                                        DoEventCall(type, "QQFriendAddReq", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQFriendAddReq(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_EXIT_SUCC:
-                                        DoEventCall(type, "QQGroupExitSuc", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitSucArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupExitSuc(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitSucArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_REVOKE:
-                                        DoEventCall(type, "QQFriendRevoke", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendRevokeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQFriendRevoke(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendRevokeArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_SHUT:
-                                        DoEventCall(type, "QQGroupShut", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupShutArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupShut(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupShutArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_DELETE:
-                                        DoEventCall(type, "QQFriendDelete", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendDeletArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQFriendDelete(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendDeletArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_REVOKE:
-                                        DoEventCall(type, "QQGroupRevoke", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupRevokeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupRevoke(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupRevokeArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_UNIQUETITTLE_CHANGED:
-                                        DoEventCall(type, "QQGroupTitleChange", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupTitleChangeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupTitleChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupTitleChangeArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_JOIN:
-                                        DoEventCall(type, "QQGroupJoin", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinReqArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupJoin(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinReqArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMIN:
-                                        DoEventCall(type, "QQGroupAdminChange", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupAdminChangeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupAdminChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupAdminChangeArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_EXIT:
-                                        DoEventCall(type, "QQGroupExitPush", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitPushArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupExitPush(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitPushArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_JOIN_SUCC:
-                                        DoEventCall(type, "QQGroupJoinSuc", new object[]{JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinSucArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ }); break;
+                                        instance.EventQQGroupJoinSuc(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinSucArgs>>>(msgText).CurrentPacket.Data,
+                                baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMINSYSNOTIFY:
-                                        DoEventCall(type, "QQGroupInvite", new object[] { JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupInviteArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ });
+                                        instance.EventQQGroupInvite(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupInviteArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
                                         break;
                                 }
                             }
@@ -238,15 +234,6 @@ namespace Traceless.OPQSDK.Plugin
                         }
                     });
             });
-        }
-
-        private static void DoEventCall(Type type, string eventName, object[] obj)
-        {
-            var method = type.GetMethod(eventName);
-            if (null != method)
-            {
-                method.Invoke(null, obj);
-            }
         }
 
         private static void SocketOpened(object sender, EventArgs e)
