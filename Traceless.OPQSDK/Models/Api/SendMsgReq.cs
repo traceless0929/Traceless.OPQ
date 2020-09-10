@@ -52,8 +52,5 @@ namespace Traceless.OPQSDK.Models.Api
         public string picBase64Buf { get; set; }
 
         public string fileMd5 { get; set; } = "";
-
-        /// <summary> At用户 传入用户的QQ号 其他情况为0 (不支持多人At) </summary>
-        public long atUser { get; set; } = 0;
     }
 }

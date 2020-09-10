@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.SocketIO", "Trace
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.Utils", "Traceless.Utils\Traceless.Utils.csproj", "{97BBE97B-4B8E-412F-9A70-6B01E136DD1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traceless.Robot", "Traceless.Robot\Traceless.Robot.csproj", "{B67190B4-8E01-4744-A5BA-246FC4447BE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Traceless.Robot", "Traceless.Robot\Traceless.Robot.csproj", "{B67190B4-8E01-4744-A5BA-246FC4447BE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FE2C6295-E6FF-4264-A2FD-61BD58B3020F}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
