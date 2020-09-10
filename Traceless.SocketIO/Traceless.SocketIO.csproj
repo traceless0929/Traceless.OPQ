@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>Traceless.SocketIO</PackageId>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <Authors>Traceless</Authors>
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore，Part Of Socket</PackageDescription>
