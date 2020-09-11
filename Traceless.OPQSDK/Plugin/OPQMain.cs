@@ -19,6 +19,10 @@ namespace Traceless.OPQSDK.Plugin
         public static Client socket;
         private static ConcurrentBag<BasePlugin> _instanceBag = new ConcurrentBag<BasePlugin>();
 
+        /// <summary>
+        /// 启动客户端
+        /// </summary>
+        /// <returns></returns>
         public static async Task Client()
         {
             socket = new Client(System.Configuration.ConfigurationManager.AppSettings["address"]);

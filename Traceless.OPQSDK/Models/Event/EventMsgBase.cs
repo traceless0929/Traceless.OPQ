@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Event
 {
+    /// <summary>
+    /// 基础事件消息体
+    /// </summary>
     public class EventMsgBase
     {
         /// <summary>

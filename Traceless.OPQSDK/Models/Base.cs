@@ -7,6 +7,10 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models
 {
+    /// <summary>
+    /// 基础消息体
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseData<T> where T : class
     {
         /// <summary>
@@ -20,6 +24,10 @@ namespace Traceless.OPQSDK.Models
         public long CurrentQQ { get; set; }
     }
 
+    /// <summary>
+    /// 基础包体
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CurrentPacket<T> where T : class
     {
         /// <summary>
@@ -32,6 +40,9 @@ namespace Traceless.OPQSDK.Models
         public T Data { get; set; }
     }
 
+    /// <summary>
+    /// 基础消息体
+    /// </summary>
     public class BaseMsg
     {
         /// <summary>

@@ -19,9 +19,15 @@ namespace Traceless.OPQSDK.Models.Api
         /// </summary>
         public string NextToken { get; set; }
 
+        /// <summary>
+        /// 群列表项
+        /// </summary>
         public Trooplist[] TroopList { get; set; }
     }
 
+    /// <summary>
+    /// 群列表项
+    /// </summary>
     public class Trooplist
     {
         /// <summary>

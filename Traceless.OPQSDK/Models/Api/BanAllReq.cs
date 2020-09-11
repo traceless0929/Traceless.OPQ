@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Api
 {
+    /// <summary>
+    /// 全体禁言请求类
+    /// </summary>
     public class BanAllReq
     {
         /// <summary>

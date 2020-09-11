@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Event
 {
+    /// <summary>
+    /// 群邀请事件回调参数
+    /// </summary>
     public class GroupInviteArgs
     {
         /// <summary>

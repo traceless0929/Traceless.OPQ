@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Msg
 {
+    /// <summary>
+    /// 好友消息
+    /// </summary>
     public class FriendMsg : BaseMsg
     {
         /// <summary>

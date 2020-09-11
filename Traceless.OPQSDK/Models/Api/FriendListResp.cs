@@ -35,6 +35,9 @@ namespace Traceless.OPQSDK.Models.Api
         public int Totoal_friend_count { get; set; }
     }
 
+    /// <summary>
+    /// 好友列表项
+    /// </summary>
     public class Friendlist
     {
         /// <summary>

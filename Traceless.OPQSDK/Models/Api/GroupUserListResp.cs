@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Api
 {
+    /// <summary>
+    /// 群成员列表
+    /// </summary>
     public class GroupUserListResp
     {
         /// <summary>
@@ -21,9 +24,15 @@ namespace Traceless.OPQSDK.Models.Api
         /// </summary>
         public long LastUin { get; set; }
 
+        /// <summary>
+        /// 群成员列表
+        /// </summary>
         public Memberlist[] MemberList { get; set; }
     }
 
+    /// <summary>
+    /// 群成员列表项
+    /// </summary>
     public class Memberlist
     {
         /// <summary>

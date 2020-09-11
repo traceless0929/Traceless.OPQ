@@ -8,11 +8,8 @@
     <Authors>Traceless</Authors>
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore,Part Of Util</PackageDescription>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\My\Traceless.OPQ\Traceless.Utils\Traceless.Utils.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

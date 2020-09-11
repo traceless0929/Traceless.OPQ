@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace Traceless.OPQSDK.Models.Msg
 {
+    /// <summary>
+    /// 群消息
+    /// </summary>
     public class GroupMsg : BaseMsg
     {
         /// <summary>

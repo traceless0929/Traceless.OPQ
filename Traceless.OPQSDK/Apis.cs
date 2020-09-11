@@ -12,6 +12,9 @@ using Traceless.OPQSDK.Models;
 
 namespace Traceless.OPQSDK
 {
+    /// <summary>
+    /// 提供了所有Api方法
+    /// </summary>
     public class Apis
     {
         private static string _ApiAddress = "";
@@ -108,7 +111,6 @@ namespace Traceless.OPQSDK
         /// <summary>
         /// 获取好友列表【建议缓存结果，过一段时间再调用】
         /// </summary>
-        /// <param name="req"></param>
         /// <returns></returns>
         public static List<Friendlist> GetQQFriendList()
         {
@@ -272,7 +274,7 @@ namespace Traceless.OPQSDK
         /// <summary>
         /// 获取任意用户信息昵称头像等
         /// </summary>
-        /// <param name="req"></param>
+        /// <param name="qq">目标用户QQ</param>
         /// <returns></returns>
         public static UserInfoResp GetUserInfo(long qq)
         {
@@ -297,12 +299,18 @@ namespace Traceless.OPQSDK
             }
             if (msg.Ret == 241)
             {
-
                 Console.WriteLine($"[WARN]API调用过于频繁，本条丢弃{JsonConvert.SerializeObject(req)}");
             }
             return msg;
         }
 
+        /// <summary>
+        /// 发送Post请求
+        /// </summary>
+        /// <typeparam name="T">结果类</typeparam>
+        /// <param name="url">post地址</param>
+        /// <param name="data">请求体</param>
+        /// <returns></returns>
         public static T Post<T>(string url, object data) where T : class
         {
             Task<HttpResponseMessage> responseMessage = PostAsync(url, JsonConvert.SerializeObject(data));
@@ -314,6 +322,12 @@ namespace Traceless.OPQSDK
             return default(T);
         }
 
+        /// <summary>
+        /// 发送Get请求
+        /// </summary>
+        /// <typeparam name="T">结果类</typeparam>
+        /// <param name="url">get请求地址</param>
+        /// <returns></returns>
         public static T Get<T>(string url) where T : class
         {
             Task<HttpResponseMessage> responseMessage = GetAsync(url);

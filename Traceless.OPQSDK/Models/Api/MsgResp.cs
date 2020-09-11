@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Api
 {
+    /// <summary>
+    /// 基础返回体
+    /// </summary>
     public class MsgResp
     {
         /// <summary>

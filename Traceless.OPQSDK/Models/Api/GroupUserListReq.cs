@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Api
 {
+    /// <summary>
+    /// 群成员列表请求
+    /// </summary>
     public class GroupUserListReq
     {
         /// <summary>
