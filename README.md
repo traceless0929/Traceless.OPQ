@@ -15,7 +15,7 @@ Nuget
 
 ```powershell
 //SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.8
+Install-Package Traceless.OPQSDK -Version 0.0.9
 ```
 
 
@@ -46,10 +46,11 @@ Install-Package Traceless.OPQSDK -Version 0.0.8
 
 ## TODO
 
-1. ~~多插件支持-反射实现调用~~
-2. ~~多插件支持-插件优先级~~
-3. ~~多插件支持-消息拦截~~
-4. ~~增加管理者QQ配置，成功登陆发送信息~~
+1. ~~多插件支持-反射实现调用 ✖~~
+2. ~~多插件支持-插件优先级 ✔~~
+3. ~~多插件支持-消息拦截 ✔~~
+4. ~~增加管理者QQ配置，成功登陆发送信息 ✔~~
+5. 重构basePlugin，不再使用反射调用事件方法 ✔
 
 #### 项目结构
 
