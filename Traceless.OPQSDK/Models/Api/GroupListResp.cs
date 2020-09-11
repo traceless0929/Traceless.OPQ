@@ -33,7 +33,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群号
         /// </summary>
-        public int GroupId { get; set; }
+        public long GroupId { get; set; }
 
         /// <summary>
         /// 群成员数量
