@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Traceless.SocketIO</PackageId>
     <Version>0.0.4-Test</Version>
     <Authors>Traceless</Authors>
