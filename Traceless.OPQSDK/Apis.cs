@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models;
+using Traceless.OPQSDK.Plugin;
 
 namespace Traceless.OPQSDK
 {
@@ -24,6 +25,17 @@ namespace Traceless.OPQSDK
         {
             _RobotQQ = System.Configuration.ConfigurationManager.AppSettings["robotqq"];
             _ApiAddress = System.Configuration.ConfigurationManager.AppSettings["address"] + "v1/LuaApiCaller?qq=" + _RobotQQ + "&timeout=10";
+        }
+
+        /// <summary>
+        /// 获取插件数据根目录
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="plugin"></param>
+        /// <returns></returns>
+        public static string GetPluginDataDic<T>(T plugin) where T : BasePlugin
+        {
+            return System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), plugin.AppId);
         }
 
         /// <summary>

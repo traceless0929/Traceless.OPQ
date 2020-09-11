@@ -15,7 +15,7 @@ namespace Traceless.OPQSDK.Models.Event
         public long Seq { get; set; }
 
         /// <summary>
-        /// 类型
+        /// 类型 1邀请入群 5退群
         /// </summary>
         public int Type { get; set; }
 
