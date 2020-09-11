@@ -28,7 +28,7 @@ jobs:
         $targetNugetExe = "nuget.exe"
         Invoke-WebRequest $sourceNugetExe -OutFile $targetNugetExe
     # 5. Push  package
-    - name: Push generated package to GitHub registry
+    - name: Push generated package to nuget registry
       run: |
         .\nuget push .\Traceless.SocketIO\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols
         .\nuget push .\Traceless.OPQSDK\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols
