@@ -10,6 +10,10 @@
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\My\Traceless.OPQ\Traceless.SocketIO\Traceless.SocketIO.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="SocketIOClient" Version="2.0.2.4" />
     <PackageReference Include="WebSocket4Net" Version="0.15.2" />
