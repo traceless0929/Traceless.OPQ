@@ -1,4 +1,4 @@
-name: Nuget
+name: Nuget-github
 
 on:
   push:
