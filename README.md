@@ -5,6 +5,8 @@ OPQ C# SDK 【netcore 3.1】
 
 ![.NET Core](https://github.com/traceless0929/Traceless.OPQ/workflows/.NET%20Core/badge.svg)
 
+![Nuget](https://github.com/traceless0929/Traceless.OPQ/workflows/Nuget/badge.svg?branch=master&event=workflow_run)
+
 [WIKI点击进入](https://github.com/OPQBOT/OPQ/wiki)
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**

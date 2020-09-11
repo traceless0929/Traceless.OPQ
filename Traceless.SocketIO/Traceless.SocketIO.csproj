@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Traceless.SocketIO</PackageId>
-    <Version>0.0.4-Test</Version>
+    <Version>0.0.4</Version>
     <Authors>Traceless</Authors>
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore，Part Of Socket</PackageDescription>
