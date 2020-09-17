@@ -131,7 +131,7 @@ namespace Traceless.OPQSDK
             FriendListResp friend = new FriendListResp();
             do
             {
-                friend = Post<FriendListResp>(_ApiAddress + "&funcname=GetFriendListReq", req);
+                friend = Post<FriendListResp>(_ApiAddress + "&funcname=friendlist.GetFriendListReq", req);
                 res.AddRange(friend.Friendlist.GroupBy(p => p.FriendUin).Select(p => p.First()).ToList());
                 req.StartIndex = friend.StartIndex;
             }
@@ -151,8 +151,12 @@ namespace Traceless.OPQSDK
             GroupListResp group = new GroupListResp();
             do
             {
-                group = Post<GroupListResp>(_ApiAddress + "&funcname=GetTroopListReqV2", req);
-                if (group.TroopList != null)
+                group = Post<GroupListResp>(_ApiAddress + "&funcname=friendlist.GetTroopListReqV2", req);
+                if (null == group)
+                {
+                    group = new GroupListResp();
+                }
+                if (group.TroopList != null && group.TroopList.Count > 0)
                 {
                     res.AddRange(group.TroopList.GroupBy(p => p.GroupId).Select(p => p.First()).ToList());
                 }
@@ -329,6 +333,7 @@ namespace Traceless.OPQSDK
             if (responseMessage.Result.IsSuccessStatusCode)
             {
                 Task<string> t = responseMessage.Result.Content.ReadAsStringAsync();
+                //System.Console.WriteLine($"{url}->{JsonConvert.SerializeObject(data)}{t.Result}");
                 return JsonConvert.DeserializeObject<T>(t.Result);
             }
             return default(T);
