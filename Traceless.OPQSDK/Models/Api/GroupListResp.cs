@@ -22,13 +22,13 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群列表项
         /// </summary>
-        public List<Trooplist> TroopList { get; set; } = new List<Trooplist>();
+        public List<GroupInfo> TroopList { get; set; } = new List<GroupInfo>();
     }
 
     /// <summary>
     /// 群列表项
     /// </summary>
-    public class Trooplist
+    public class GroupInfo
     {
         /// <summary>
         /// 群号

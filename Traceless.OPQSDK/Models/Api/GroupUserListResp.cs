@@ -27,13 +27,13 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群成员列表
         /// </summary>
-        public Memberlist[] MemberList { get; set; }
+        public List<GMemberInfo> MemberList { get; set; } = new List<GMemberInfo>();
     }
 
     /// <summary>
     /// 群成员列表项
     /// </summary>
-    public class Memberlist
+    public class GMemberInfo
     {
         /// <summary>
         /// 年龄

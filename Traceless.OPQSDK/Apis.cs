@@ -38,6 +38,11 @@ namespace Traceless.OPQSDK
             return System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), plugin.AppId);
         }
 
+        public static string GetPluginDataDic(string appId)
+        {
+            return System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), appId);
+        }
+
         /// <summary>
         /// 发送群消息
         /// </summary>
@@ -144,10 +149,10 @@ namespace Traceless.OPQSDK
         /// 获取群组列表【建议缓存结果，过一段时间再调用】
         /// </summary>
         /// <returns></returns>
-        public static List<Trooplist> GetGroupList()
+        public static List<GroupInfo> GetGroupList()
         {
             GroupListReq req = new GroupListReq();
-            List<Trooplist> res = new List<Trooplist>();
+            List<GroupInfo> res = new List<GroupInfo>();
             GroupListResp group = new GroupListResp();
             do
             {
@@ -171,10 +176,10 @@ namespace Traceless.OPQSDK
         /// 获群成员列表【建议缓存结果，过一段时间再调用】
         /// </summary>
         /// <returns></returns>
-        public static List<Memberlist> GetGroupUserList(long gid)
+        public static List<GMemberInfo> GetGroupUserList(long gid)
         {
             GroupUserListReq req = new GroupUserListReq() { GroupUin = gid };
-            List<Memberlist> res = new List<Memberlist>();
+            List<GMemberInfo> res = new List<GMemberInfo>();
             GroupUserListResp group = new GroupUserListResp();
             do
             {
