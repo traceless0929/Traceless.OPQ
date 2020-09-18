@@ -10,6 +10,7 @@ using System.Linq;
 using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models;
 using Traceless.OPQSDK.Plugin;
+using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.OPQSDK
 {
@@ -50,8 +51,9 @@ namespace Traceless.OPQSDK
         /// <param name="txt">文字内容</param>
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
+        /// <param name="changeCode">是否转换OPQ吗</param>
         /// <returns></returns>
-        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "")
+        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "", bool changeCode = true)
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
@@ -71,7 +73,7 @@ namespace Traceless.OPQSDK
                 req.picUrl = pic.StartsWith("http") ? pic : "";
                 req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
             }
-            return SendMsg(req);
+            return SendMsg(req, changeCode);
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "")
+        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "", bool changeCode = true)
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
@@ -102,7 +104,7 @@ namespace Traceless.OPQSDK
                 req.picUrl = pic.StartsWith("http") ? pic : "";
                 req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
             }
-            return SendMsg(req);
+            return SendMsg(req, changeCode);
         }
 
         /// <summary>
@@ -307,8 +309,24 @@ namespace Traceless.OPQSDK
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        private static MsgResp SendMsg(SendMsgReq req)
+        private static MsgResp SendMsg(SendMsgReq req, bool changeCode)
         {
+            System.Console.WriteLine(req.content);
+            List<OPQCode> codes = OPQCode.Parse(req.content);
+            if (changeCode)
+            {
+                if (string.IsNullOrEmpty(req.picUrl))
+                {
+                    codes.Where(p => p.Function == OPQFunction.Pic).ToList().ForEach(code =>
+                      {
+                          req.sendMsgType = "PicMsg";
+                          req.picUrl = code.Items["url"];
+                          req.picBase64Buf = "";
+                          req.content = req.content.Replace(code.ToString(), "");
+                      });
+                }
+            }
+
             MsgResp msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
             int i = 0;
             while (msg.Ret == 241 && i < 10)

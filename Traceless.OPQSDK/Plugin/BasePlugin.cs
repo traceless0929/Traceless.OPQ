@@ -141,7 +141,7 @@ namespace Traceless.OPQSDK.Plugin
         public abstract void EventQQGroupTitleChange(BaseEvent<GroupTitleChangeArgs> msg, long currentQQ);
 
         /// <summary>
-        /// 加群请求
+        /// 加群相关，加群请求、成功入群
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="currentQQ"></param>
@@ -169,7 +169,7 @@ namespace Traceless.OPQSDK.Plugin
         public abstract void EventQQGroupJoinSuc(BaseEvent<GroupJoinSucArgs> msg, long currentQQ);
 
         /// <summary>
-        /// 收到群邀请
+        /// 入群相关，被邀请、主动申请
         /// </summary>
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
