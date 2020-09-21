@@ -18,9 +18,15 @@ namespace Traceless.OPQSDK.Models.Msg
         Unknown,
 
         /// <summary>
-        /// QQ表情
+        /// 图片
         /// </summary>
         [Description("pic")]
-        Pic
+        Pic,
+
+        /// <summary>
+        /// 语音
+        /// </summary>
+        [Description("voice")]
+        Voice
     }
 }

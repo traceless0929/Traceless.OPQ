@@ -325,6 +325,16 @@ namespace Traceless.OPQSDK
                           req.content = req.content.Replace(code.ToString(), "");
                       });
                 }
+                if (string.IsNullOrEmpty(req.voiceUrl))
+                {
+                    codes.Where(p => p.Function == OPQFunction.Voice).ToList().ForEach(code =>
+                      {
+                          req.sendMsgType = "VoiceMsg";
+                          req.voiceUrl = code.Items["url"];
+                          req.picBase64Buf = "";
+                          req.content = req.content.Replace(code.ToString(), "");
+                      });
+                }
             }
 
             MsgResp msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
