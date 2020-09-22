@@ -17,7 +17,7 @@ Nuget
 
 ```powershell
 //SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.13
+Install-Package Traceless.OPQSDK -Version 0.0.14
 ```
 
 
