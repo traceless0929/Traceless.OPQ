@@ -48,6 +48,21 @@ namespace Traceless.OPQSDK.Models.Msg
             return new OPQCode(OPQFunction.Pic, new KeyValuePair<string, string>("url", url)).ToString();
         }
 
+        /// <summary>
+        /// 语音码，会自动转换为url中的语音进行发送
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string Voice_Http(string url)
+        {
+            return new OPQCode(OPQFunction.Voice, new KeyValuePair<string, string>("url", url)).ToString();
+        }
+
+        /// <summary>
+        /// 解析文本中的OPQ码
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <returns></returns>
         public static List<OPQCode> ParseCQCode(this string raw)
         {
             return OPQCode.Parse(raw);
