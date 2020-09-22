@@ -43,9 +43,9 @@ namespace Traceless.OPQSDK.Models.Msg
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string Pic_Http(string url)
+        public static OPQCode Pic_Http(string url)
         {
-            return new OPQCode(OPQFunction.Pic, new KeyValuePair<string, string>("url", url)).ToString();
+            return new OPQCode(OPQFunction.Pic, new KeyValuePair<string, string>("url", url));
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace Traceless.OPQSDK.Models.Msg
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string Voice_Http(string url)
+        public static OPQCode Voice_Http(string url)
         {
-            return new OPQCode(OPQFunction.Voice, new KeyValuePair<string, string>("url", url)).ToString();
+            return new OPQCode(OPQFunction.Voice, new KeyValuePair<string, string>("url", url));
         }
 
         /// <summary>
