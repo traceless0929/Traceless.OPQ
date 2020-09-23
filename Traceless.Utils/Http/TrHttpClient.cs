@@ -16,7 +16,7 @@ namespace Traceless.Utils.Http
             _clientFactory = clientFactory;
         }
 
-        public Task<HttpResponseMessage> GetAsync(string url, string contentType = "application/json")
+        public Task<HttpResponseMessage> GetAsync(string url)
         {
             var request = new HttpRequestMessage(HttpMethod.Get,
                  new Uri(url));

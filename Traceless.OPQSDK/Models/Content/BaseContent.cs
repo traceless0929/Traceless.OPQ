@@ -8,11 +8,11 @@ namespace Traceless.OPQSDK.Models.Content
     {
         public string Tips { get; set; }
 
-        public string Content { get; set; }
+        public string Content { get; set; } = "";
 
         /// <summary>
         /// AT列表
         /// </summary>
-        public List<long> UserID { get; set; }
+        public List<long> UserID { get; set; } = new List<long>();
     }
 }

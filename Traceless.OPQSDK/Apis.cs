@@ -11,6 +11,7 @@ using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models;
 using Traceless.OPQSDK.Plugin;
 using Traceless.OPQSDK.Models.Msg;
+using Traceless.Utils;
 
 namespace Traceless.OPQSDK
 {
@@ -114,7 +115,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object GroupMgr(GroupMgrReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=GroupMgr", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=GroupMgr", req);
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object AddQQUser(AddQQReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=AddQQUser", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=AddQQUser", req);
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace Traceless.OPQSDK
             FriendListResp friend = new FriendListResp();
             do
             {
-                friend = Post<FriendListResp>(_ApiAddress + "&funcname=friendlist.GetFriendListReq", req);
+                friend = HttpUtils.Post<FriendListResp>(_ApiAddress + "&funcname=friendlist.GetFriendListReq", req);
                 res.AddRange(friend.Friendlist.GroupBy(p => p.FriendUin).Select(p => p.First()).ToList());
                 req.StartIndex = friend.StartIndex;
             }
@@ -158,7 +159,7 @@ namespace Traceless.OPQSDK
             GroupListResp group = new GroupListResp();
             do
             {
-                group = Post<GroupListResp>(_ApiAddress + "&funcname=friendlist.GetTroopListReqV2", req);
+                group = HttpUtils.Post<GroupListResp>(_ApiAddress + "&funcname=friendlist.GetTroopListReqV2", req);
                 if (null == group)
                 {
                     group = new GroupListResp();
@@ -185,7 +186,7 @@ namespace Traceless.OPQSDK
             GroupUserListResp group = new GroupUserListResp();
             do
             {
-                group = Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req);
+                group = HttpUtils.Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req);
                 res.AddRange(group.MemberList);
                 req.LastUin = group.LastUin;
             }
@@ -200,7 +201,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object RevokeMsg(RevokeMsgReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=PbMessageSvc.PbMsgWithDraw", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=PbMessageSvc.PbMsgWithDraw", req);
         }
 
         /// <summary>
@@ -210,7 +211,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static List<GroupSearchItemResp> SearchGroup(GroupSearchReq req)
         {
-            return Post<List<GroupSearchItemResp>>(_ApiAddress + "&funcname=OidbSvc.0x8ba_31", req);
+            return HttpUtils.Post<List<GroupSearchItemResp>>(_ApiAddress + "&funcname=OidbSvc.0x8ba_31", req);
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object QQZan(long qq)
         {
-            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x7e5_4", new QQZanReq() { UserID = qq });
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=OidbSvc.0x7e5_4", new QQZanReq() { UserID = qq });
         }
 
         /// <summary>
@@ -228,7 +229,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static QQCkResp GetQQCk()
         {
-            return Get<QQCkResp>(_ApiAddress + "&funcname=GetUserCook");
+            return HttpUtils.Get<QQCkResp>(_ApiAddress + "&funcname=GetUserCook");
         }
 
         /// <summary>
@@ -237,7 +238,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object DealFriend(FriendAddReqArgs arg)
         {
-            return Post<object>(_ApiAddress + "&funcname=DealFriend", arg);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=DealFriend", arg);
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object AnswerInviteGroup(GroupInviteArgs arg)
         {
-            return Post<object>(_ApiAddress + "&funcname=AnswerInviteGroup", arg);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=AnswerInviteGroup", arg);
         }
 
         /// <summary>
@@ -255,7 +256,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object ModifyGroupCard(SetGroupCardReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=friendlist.ModifyGroupCardReq", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=friendlist.ModifyGroupCardReq", req);
         }
 
         /// <summary>
@@ -264,7 +265,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object SetUniqueTitle(SetGroupTitleReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x8fc_2", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=OidbSvc.0x8fc_2", req);
         }
 
         /// <summary>
@@ -273,7 +274,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object Announce(SendGNoticeReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=Announce", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=Announce", req);
         }
 
         /// <summary>
@@ -282,7 +283,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object BanAllGroup(BanAllReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x89a_0", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=OidbSvc.0x89a_0", req);
         }
 
         /// <summary>
@@ -291,7 +292,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static object Ban(BanReq req)
         {
-            return Post<object>(_ApiAddress + "&funcname=OidbSvc.0x570_8", req);
+            return HttpUtils.Post<object>(_ApiAddress + "&funcname=OidbSvc.0x570_8", req);
         }
 
         /// <summary>
@@ -301,7 +302,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static UserInfoResp GetUserInfo(long qq)
         {
-            return Post<UserInfoResp>(_ApiAddress + "&funcname=GetUserInfo", new QQZanReq() { UserID = qq });
+            return HttpUtils.Post<UserInfoResp>(_ApiAddress + "&funcname=GetUserInfo", new QQZanReq() { UserID = qq });
         }
 
         /// <summary>
@@ -337,13 +338,13 @@ namespace Traceless.OPQSDK
                 }
             }
 
-            MsgResp msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+            MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
             int i = 0;
             while (msg.Ret == 241 && i < 10)
             {
                 Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");
                 System.Threading.Thread.Sleep(1100);
-                msg = Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+                msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
                 i++;
             }
             if (msg.Ret == 241)
@@ -351,56 +352,6 @@ namespace Traceless.OPQSDK
                 Console.WriteLine($"[WARN]API调用过于频繁，本条丢弃{JsonConvert.SerializeObject(req)}");
             }
             return msg;
-        }
-
-        /// <summary>
-        /// 发送Post请求
-        /// </summary>
-        /// <typeparam name="T">结果类</typeparam>
-        /// <param name="url">post地址</param>
-        /// <param name="data">请求体</param>
-        /// <returns></returns>
-        public static T Post<T>(string url, object data) where T : class
-        {
-            Task<HttpResponseMessage> responseMessage = PostAsync(url, JsonConvert.SerializeObject(data));
-            if (responseMessage.Result.IsSuccessStatusCode)
-            {
-                Task<string> t = responseMessage.Result.Content.ReadAsStringAsync();
-                //System.Console.WriteLine($"{url}->{JsonConvert.SerializeObject(data)}{t.Result}");
-                return JsonConvert.DeserializeObject<T>(t.Result);
-            }
-            return default(T);
-        }
-
-        /// <summary>
-        /// 发送Get请求
-        /// </summary>
-        /// <typeparam name="T">结果类</typeparam>
-        /// <param name="url">get请求地址</param>
-        /// <returns></returns>
-        public static T Get<T>(string url) where T : class
-        {
-            Task<HttpResponseMessage> responseMessage = GetAsync(url);
-            if (responseMessage.Result.IsSuccessStatusCode)
-            {
-                Task<string> t = responseMessage.Result.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<T>(t.Result);
-            }
-            return default(T);
-        }
-
-        private async static Task<HttpResponseMessage> PostAsync(string url, string postStr)
-        {
-            ITrHttpClientFactory factory = new TrHttpClientFactory();
-            var client = factory.CreateHttpClient();
-            return await client.PostAsync(url, postStr);
-        }
-
-        private async static Task<HttpResponseMessage> GetAsync(string url)
-        {
-            ITrHttpClientFactory factory = new TrHttpClientFactory();
-            var client = factory.CreateHttpClient();
-            return await client.GetAsync(url);
         }
     }
 }

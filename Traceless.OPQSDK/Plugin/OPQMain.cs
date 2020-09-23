@@ -33,7 +33,7 @@ namespace Traceless.OPQSDK.Plugin
             socket.Connect();
 
             foreach (var assembly in Assembly.GetEntryAssembly().GetTypes().Where(p => p.BaseType.IsAbstract && p.BaseType.Name == "BasePlugin")
-                .OrderByDescending(p => ((BasePlugin)Activator.CreateInstance(p)).PluginPriority))
+                .OrderBy(p => ((BasePlugin)Activator.CreateInstance(p)).PluginPriority))
             {
                 object obj = Activator.CreateInstance(assembly);
                 BasePlugin basePlugin = (BasePlugin)obj;
@@ -42,7 +42,6 @@ namespace Traceless.OPQSDK.Plugin
                 Console.WriteLine($"-------------------------------------");
             }
             Console.WriteLine($"共{_instanceBag.Count}个");
-
             socket.On("connect", (fn) =>
             {
                 Console.WriteLine(((ConnectMessage)fn).ConnectMsg);

@@ -7,7 +7,7 @@ namespace Traceless.Utils
     public class TimeStamp
     {
         /// <summary>
-        /// 日期转换为时间戳（时间戳单位秒）
+        /// 日期转换为时间戳（时间戳单位ms）
         /// </summary>
         /// <param name="TimeStamp"></param>
         /// <returns></returns>
