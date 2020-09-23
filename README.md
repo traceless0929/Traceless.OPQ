@@ -17,7 +17,7 @@ Nuget
 
 ```powershell
 //SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.14
+Install-Package Traceless.OPQSDK -Version 0.0.15
 ```
 
 
@@ -54,12 +54,10 @@ Install-Package Traceless.OPQSDK -Version 0.0.14
 ## 已完成
 
 5. 重构basePlugin，不再使用反射调用事件方法 ✔
-
 6. 增加OPQ码机制，功能类似酷Q码 ✔
-
 7. 修复了获取群列表和群成员列表出现的NPE问题 ✔
-
 8. 增加发送消息接口延迟等待机制，减少调用发送接口过于频繁产生消息丢失的可能性 ✔
+9. 增加腾讯AI平台-智能闲聊\语音合成 接口 ✔
 
 #### 项目结构
 
@@ -67,7 +65,11 @@ Traceless.OPQSDK：SDK本体，不做二次开发无需修改，SDK更新替换�
 
 Traceless.SocketIO：基于Websocket4Net的Socket.io实现【用于连接socket接收事件】
 
-Traceless.Utils：一些工具方法【内置HttpclientFactory的控制台使用实现】，会持续添加
+Traceless.Utils：一些工具方法
+
+1. 高效、自带并发控制、内存控制等netcore自带HttpclientFactory的控制台使用实现
+2. 腾讯AI开放平台-智能闲聊及语音合成（AILab）实现
+3. 随机工具类
 
 Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也可以使用任何程序作为宿主程序
 
