@@ -312,7 +312,11 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         private static MsgResp SendMsg(SendMsgReq req, bool changeCode)
         {
-            System.Console.WriteLine(req.content);
+            if (string.IsNullOrEmpty(req.content))
+            {
+                return;
+            }
+            Console.WriteLine($"[log]{(req.sendToType == 1 ? "好友" : (req.sendToType == 2 ? "群聊" : "私聊"))}给{req.toUser}->{req.content}");
             List<OPQCode> codes = OPQCode.Parse(req.content);
             if (changeCode)
             {
