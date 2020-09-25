@@ -314,7 +314,7 @@ namespace Traceless.OPQSDK
         {
             if (string.IsNullOrEmpty(req.content))
             {
-                return;
+                return new MsgResp() { Ret = 1 };
             }
             Console.WriteLine($"[log]{(req.sendToType == 1 ? "好友" : (req.sendToType == 2 ? "群聊" : "私聊"))}给{req.toUser}->{req.content}");
             List<OPQCode> codes = OPQCode.Parse(req.content);
