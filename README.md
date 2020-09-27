@@ -153,6 +153,7 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 | 获取昵称 | [GETUSERNICK(QQ号)]        | 获取某个人的QQ昵称   | ✔           |                                                          |
 | 网络图片 | [CODE:pic,url=网络图片URL] | 表示发送某张网络图片 | ✖           | 网络图片需要带https/http标头                             |
 | 语音     | CODE:voice,url=语音URL]    | 表示发送某段语音     | ✖           | 语音URL为OPQ语音消息返回体中的url，暂不支持自定义网络url |
+| 富文本分享卡片     | [CODE:rich,url=跳转地址,title=标题,desc=描述,prompt=在聊天列表里的缩略信息,preview=缩略图,tag=左角标的说明]    | 表示发送具有点击跳转功能的卡片     | ✖           | 地址\缩略图 需要http(s)地址 |
 
 
 参考项目：
