@@ -89,11 +89,13 @@ namespace Traceless.OPQSDK.Models
         /// xml信息
         /// </summary>
         /// <returns></returns>
-        public Object GetXml()
+        public string GetXml()
         {
             if (MsgType.XmlMsg == this.MsgType)
             {
-                return GetMsg<Object>();
+                this.Content = HttpUtils.DeUnicode(this.Content);
+                this.Content = JsonConvert.DeserializeObject<BaseContent>(this.Content).Content;
+                return this.Content;
             }
             return null;
         }
@@ -102,19 +104,19 @@ namespace Traceless.OPQSDK.Models
         /// json信息
         /// </summary>
         /// <returns></returns>
-        public JObject GetJson()
+        public string GetJson()
         {
             if (MsgType.JsonMsg == this.MsgType)
             {
                 this.Content = HttpUtils.DeUnicode(this.Content);
                 this.Content = JsonConvert.DeserializeObject<BaseContent>(this.Content).Content;
-                int index = this.Content.LastIndexOf(@">{");
-                if (index >= 0)
-                {
-                    this.Content = this.Content.Substring(index + 1, this.Content.Length - index - 1);
-                }
+                //int index = this.Content.LastIndexOf("{\"app\":");
+                //if (index >= 0)
+                //{
+                //    this.Content = this.Content.Substring(index, this.Content.Length - index);
+                //}
 
-                return GetMsg<JObject>();
+                return this.Content;
             }
             return null;
         }

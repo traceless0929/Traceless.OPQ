@@ -13,6 +13,7 @@ using Traceless.OPQSDK.Plugin;
 using Traceless.OPQSDK.Models.Msg;
 using Traceless.Utils;
 using System.Xml;
+using Traceless.OPQSDK.Models.Content.Card.Json;
 
 namespace Traceless.OPQSDK
 {
@@ -351,6 +352,11 @@ namespace Traceless.OPQSDK
                           req.content = req.content.Replace(code.ToString(), "");
                       });
                 }
+                codes.Where(p => p.Function == OPQFunction.Rich).ToList().ForEach(code =>
+                    {
+                        req.sendMsgType = "JsonMsg";
+                        req.content = JsonConvert.SerializeObject(new RichCard(code.Items.GetValueOrDefault("title"), code.Items.GetValueOrDefault("desc"), code.Items.GetValueOrDefault("prompt"), code.Items.GetValueOrDefault("tag"), code.Items.GetValueOrDefault("url"), code.Items.GetValueOrDefault("preview")));
+                    });
             }
 
             MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);

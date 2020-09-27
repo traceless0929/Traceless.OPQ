@@ -6,7 +6,7 @@ using System.Text;
 namespace Traceless.OPQSDK.Models.Msg
 {
     /// <summary>
-    /// 表示酷Q消息中内含 [CODE:...] 中的类型
+    /// 表示OPQ消息中内含 [CODE:...] 中的类型
     /// </summary>
     [DefaultValue(OPQFunction.Unknown)]
     public enum OPQFunction
@@ -27,6 +27,12 @@ namespace Traceless.OPQSDK.Models.Msg
         /// 语音
         /// </summary>
         [Description("voice")]
-        Voice
+        Voice,
+
+        /// <summary>
+        /// 富文本分享卡片
+        /// </summary>
+        [Description("rich")]
+        Rich
     }
 }
