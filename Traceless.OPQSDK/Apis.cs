@@ -12,6 +12,7 @@ using Traceless.OPQSDK.Models;
 using Traceless.OPQSDK.Plugin;
 using Traceless.OPQSDK.Models.Msg;
 using Traceless.Utils;
+using System.Xml;
 
 namespace Traceless.OPQSDK
 {
@@ -54,7 +55,7 @@ namespace Traceless.OPQSDK
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <param name="changeCode">是否转换OPQ吗</param>
         /// <returns></returns>
-        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "", bool changeCode = true)
+        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "", object json = null, bool changeCode = true)
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
@@ -74,6 +75,11 @@ namespace Traceless.OPQSDK
                 req.picUrl = pic.StartsWith("http") ? pic : "";
                 req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
             }
+            else if (null != json)
+            {
+                req.sendMsgType = "JsonMsg";
+                req.content = JsonConvert.SerializeObject(json);
+            }
             return SendMsg(req, changeCode);
         }
 
@@ -85,7 +91,7 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "", bool changeCode = true)
+        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "", object json = null, bool changeCode = true)
         {
             if (string.IsNullOrEmpty(txt + voice + pic))
             {
@@ -104,6 +110,11 @@ namespace Traceless.OPQSDK
                 req.sendMsgType = "PicMsg";
                 req.picUrl = pic.StartsWith("http") ? pic : "";
                 req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
+            }
+            else if (null != json)
+            {
+                req.sendMsgType = "JsonMsg";
+                req.content = JsonConvert.SerializeObject(json);
             }
             return SendMsg(req, changeCode);
         }

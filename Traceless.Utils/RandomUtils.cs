@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Traceless.Utils
 {
-    public class RandomUtil
+    public class RandomUtils
     {
         private static int GetRandomSeed()
         {

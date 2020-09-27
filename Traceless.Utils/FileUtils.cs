@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Traceless.Utils
 {
-    public class FileUtil
+    public class FileUtils
     {
         /// <summary>
         /// Base64字符串转文件并保存

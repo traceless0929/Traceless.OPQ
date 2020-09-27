@@ -4,6 +4,8 @@ using Traceless.OPQSDK.Models.Msg;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Traceless.Utils;
+using Newtonsoft.Json.Linq;
 
 namespace Traceless.OPQSDK.Models
 {
@@ -81,6 +83,40 @@ namespace Traceless.OPQSDK.Models
                 return GetMsg<PicContent>();
             }
             return new PicContent();
+        }
+
+        /// <summary>
+        /// xml信息
+        /// </summary>
+        /// <returns></returns>
+        public Object GetXml()
+        {
+            if (MsgType.XmlMsg == this.MsgType)
+            {
+                return GetMsg<Object>();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// json信息
+        /// </summary>
+        /// <returns></returns>
+        public JObject GetJson()
+        {
+            if (MsgType.JsonMsg == this.MsgType)
+            {
+                this.Content = HttpUtils.DeUnicode(this.Content);
+                this.Content = JsonConvert.DeserializeObject<BaseContent>(this.Content).Content;
+                int index = this.Content.LastIndexOf(@">{");
+                if (index >= 0)
+                {
+                    this.Content = this.Content.Substring(index + 1, this.Content.Length - index - 1);
+                }
+
+                return GetMsg<JObject>();
+            }
+            return null;
         }
 
         /// <summary>
