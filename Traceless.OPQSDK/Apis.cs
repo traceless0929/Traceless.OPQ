@@ -199,7 +199,14 @@ namespace Traceless.OPQSDK
             do
             {
                 group = HttpUtils.Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req);
-                res.AddRange(group.MemberList);
+                if (null == group)
+                {
+                    group = new GroupUserListResp();
+                }
+                if (group.MemberList.Count > 0)
+                {
+                    res.AddRange(group.MemberList);
+                }
                 req.LastUin = group.LastUin;
             }
             while (group.LastUin != 0);
