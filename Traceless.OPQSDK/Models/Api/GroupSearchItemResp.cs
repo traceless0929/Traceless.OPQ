@@ -27,7 +27,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群容量
         /// </summary>
-        public int GroupMaxMembers { get; set; }
+        public long GroupMaxMembers { get; set; }
 
         /// <summary>
         /// 群名
@@ -52,6 +52,6 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群员总数
         /// </summary>
-        public int GroupTotalMembers { get; set; }
+        public long GroupTotalMembers { get; set; }
     }
 }

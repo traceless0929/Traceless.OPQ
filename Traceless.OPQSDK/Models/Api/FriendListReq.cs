@@ -12,6 +12,6 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 开始索引
         /// </summary>
-        public int StartIndex { get; set; } = 0;
+        public long StartIndex { get; set; } = 0;
     }
 }

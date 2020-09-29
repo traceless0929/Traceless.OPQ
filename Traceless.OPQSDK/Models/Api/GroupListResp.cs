@@ -12,7 +12,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 数量
         /// </summary>
-        public int Count { get; set; }
+        public long Count { get; set; }
 
         /// <summary>
         /// 下次请求token
@@ -38,7 +38,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群成员数量
         /// </summary>
-        public int GroupMemberCount { get; set; }
+        public long GroupMemberCount { get; set; }
 
         /// <summary>
         /// 群名
@@ -58,6 +58,6 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群人数上限
         /// </summary>
-        public int GroupTotalCount { get; set; }
+        public long GroupTotalCount { get; set; }
     }
 }

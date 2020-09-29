@@ -12,7 +12,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 本页数量
         /// </summary>
-        public int Count { get; set; }
+        public long Count { get; set; }
 
         /// <summary>
         /// 群号
@@ -38,7 +38,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 年龄
         /// </summary>
-        public int Age { get; set; }
+        public long Age { get; set; }
 
         /// <summary>
         /// 自动备注，当没有群名片时，该值为QQ昵称，否则为空字符串
@@ -48,7 +48,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 信用等级？
         /// </summary>
-        public int CreditLevel { get; set; }
+        public long CreditLevel { get; set; }
 
         /// <summary>
         /// 邮件地址
@@ -58,17 +58,17 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 未知
         /// </summary>
-        public int FaceId { get; set; }
+        public long FaceId { get; set; }
 
         /// <summary>
         /// 0男 1女 255未知
         /// </summary>
-        public int Gender { get; set; }
+        public long Gender { get; set; }
 
         /// <summary>
         /// 群管理权限 192群主 1管理 0成员
         /// </summary>
-        public int GroupAdmin { get; set; }
+        public long GroupAdmin { get; set; }
 
         /// <summary>
         /// 群名片
@@ -88,7 +88,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 群成员等级【大概是头衔等级】
         /// </summary>
-        public int MemberLevel { get; set; }
+        public long MemberLevel { get; set; }
 
         /// <summary>
         /// QQ号
@@ -118,6 +118,6 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 啥东西？
         /// </summary>
-        public int Status { get; set; }
+        public long Status { get; set; }
     }
 }

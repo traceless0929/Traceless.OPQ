@@ -12,7 +12,7 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 好友数量
         /// </summary>
-        public int Friend_count { get; set; }
+        public long Friend_count { get; set; }
 
         /// <summary>
         /// 好友列表
@@ -22,17 +22,17 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 本次请求获取的好友数量上限
         /// </summary>
-        public int GetfriendCount { get; set; }
+        public long GetfriendCount { get; set; }
 
         /// <summary>
         /// 开始索引
         /// </summary>
-        public int StartIndex { get; set; }
+        public long StartIndex { get; set; }
 
         /// <summary>
         /// 总计好友数量
         /// </summary>
-        public int Totoal_friend_count { get; set; }
+        public long Totoal_friend_count { get; set; }
     }
 
     /// <summary>
@@ -68,6 +68,6 @@ namespace Traceless.OPQSDK.Models.Api
         /// <summary>
         /// 状态 不太懂干嘛用
         /// </summary>
-        public int Status { get; set; }
+        public long Status { get; set; }
     }
 }
