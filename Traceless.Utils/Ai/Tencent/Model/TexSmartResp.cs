@@ -17,7 +17,7 @@ namespace Traceless.Utils.Ai.Tencent.Model
         /// </summary>
         public string norm_str { get; set; }
 
-        public int lang { get; set; }
+        public object lang { get; set; }
 
         /// <summary>
         /// 基础粒度分词和词性标注的结果
