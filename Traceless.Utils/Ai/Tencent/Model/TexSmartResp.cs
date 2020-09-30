@@ -115,5 +115,6 @@ namespace Traceless.Utils.Ai.Tencent.Model
     public class Meaning
     {
         public int[] value { get; set; }
+        public string[] related { get; set; }
     }
 }
