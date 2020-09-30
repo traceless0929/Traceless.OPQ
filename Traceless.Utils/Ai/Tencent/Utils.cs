@@ -125,15 +125,15 @@ namespace Traceless.Utils.Ai.Tencent
 
                 case 3:
 
-                    return new DateTime(arr[0], arr[1], arr[2], dt.Hour, dt.Minute, dt.Second);
+                    return new DateTime(arr[0], arr[1], arr[2], 0, 0, 0);
 
                 case 4:
 
-                    return new DateTime(arr[0], arr[1], arr[2], arr[3], dt.Minute, dt.Second);
+                    return new DateTime(arr[0], arr[1], arr[2], arr[3], 0, 0);
 
                 case 5:
 
-                    return new DateTime(arr[0], arr[1], arr[2], arr[3], arr[4], dt.Second);
+                    return new DateTime(arr[0], arr[1], arr[2], arr[3], arr[4], 0);
 
                 case 6:
 
