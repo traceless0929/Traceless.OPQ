@@ -85,7 +85,7 @@ namespace Traceless.OPQSDK.Models.Msg
         /// </summary>
         /// <param name="raw"></param>
         /// <returns></returns>
-        public static List<OPQCode> ParseCQCode(this string raw)
+        public static List<OPQCode> ParseOPQCode(this string raw)
         {
             return OPQCode.Parse(raw);
         }

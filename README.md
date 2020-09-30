@@ -17,7 +17,7 @@ Nuget
 
 ```powershell
 //SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.18
+Install-Package Traceless.OPQSDK -Version 0.0.19
 ```
 
 
@@ -70,7 +70,7 @@ Traceless.Utils：一些工具方法
 1. 高效、自带并发控制、内存控制等netcore自带HttpclientFactory的控制台使用实现
 2. 腾讯AI开放平台-智能闲聊及语音合成（AILab）实现
 3. 随机工具类
-4. 自然语言解析时间（可用于识别自然语言实现个人助理提醒等）[说明文档](https://github.com/shinyke/Time-NLP)
+4. 腾讯文本理解工具与服务（使用AI分析自然语言）[说明文档](https://ai.tencent.com/ailab/nlp/texsmart/zh/index.html)
 
 Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也可以使用任何程序作为宿主程序
 
@@ -162,3 +162,7 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 [C# 插件 By:枫林](https://github.com/fenglindubu/IOTQQ_Socket)
 
 [仓鼠的QQ Bot框架-Java版本](https://github.com/MiniDay/HamsterBot-IOTQQ)
+
+### 个人项目截图
+
+![运行图](https://image.cdn.traceless.site/picgo/B693CC48-99DF-4cd9-9B23-7C6A41B5392E.png)

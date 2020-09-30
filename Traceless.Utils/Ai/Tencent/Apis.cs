@@ -71,5 +71,15 @@ namespace Traceless.Utils.Ai.Tencent
             req.sign = Utils.Sign(req, _apiKey);
             return HttpUtils.Get<BaseResp<Aai_TtsResp>>(Utils.getAaiUrl() + "?" + Utils.Parameter(req));
         }
+
+        /// <summary>
+        /// 语义分析
+        /// </summary>
+        /// <param name="req">需要分析的语句</param>
+        /// <returns></returns>
+        public static TexSmartResp TexAnalysis(string req)
+        {
+            return HttpUtils.Post<TexSmartResp>(Utils.getTexUrl(), new TexSmartRequest { str = req });
+        }
     }
 }

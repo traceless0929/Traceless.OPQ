@@ -12,6 +12,16 @@ namespace Traceless.Utils.Ai.Tencent
         private const string rootUrl = @"https://api.ai.qq.com/";
         private const string aai_tts = @"fcgi-bin/aai/aai_tts";
         private const string textchat = @"fcgi-bin/nlp/nlp_textchat";
+        private const string tex_smart = @"https://texsmart.qq.com/api";
+
+        /// <summary>
+        /// 获取语义分析
+        /// </summary>
+        /// <returns></returns>
+        public static string getTexUrl()
+        {
+            return tex_smart;
+        }
 
         /// <summary>
         /// 获取AI语音合成请求地址
@@ -93,6 +103,45 @@ namespace Traceless.Utils.Ai.Tencent
                 }
             }
             return result.TrimStart('&');
+        }
+
+        /// <summary>
+        /// 获取语义分析中的时间
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static DateTime parseTexDtArr(int[] arr)
+        {
+            DateTime dt = DateTime.Now;
+            switch (arr.Length)
+            {
+                case 1:
+
+                    return new DateTime(arr[0], dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
+
+                case 2:
+
+                    return new DateTime(arr[0], arr[1], dt.Day, dt.Hour, dt.Minute, dt.Second);
+
+                case 3:
+
+                    return new DateTime(arr[0], arr[1], arr[2], dt.Hour, dt.Minute, dt.Second);
+
+                case 4:
+
+                    return new DateTime(arr[0], arr[1], arr[2], arr[3], dt.Minute, dt.Second);
+
+                case 5:
+
+                    return new DateTime(arr[0], arr[1], arr[2], arr[3], arr[4], dt.Second);
+
+                case 6:
+
+                    return new DateTime(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+
+                default:
+                    return dt;
+            }
         }
     }
 }
