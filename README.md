@@ -3,24 +3,11 @@ OPQ C# SDK 【netcore 3.1】
 
 这里是Netcore 3.1 OPQ C# SDK
 
-![.NET Core](https://github.com/traceless0929/Traceless.OPQ/workflows/.NET%20Core/badge.svg)
-
-![Nuget](https://github.com/traceless0929/Traceless.OPQ/workflows/Nuget/badge.svg)
+![.NET Core](https://github.com/traceless0929/Traceless.OPQ/workflows/.NET%20Core/badge.svg) [![NuGet](https://buildstats.info/nuget/Traceless.OPQSDK)](https://www.nuget.org/packages/Traceless.OPQSDK/)
 
 [WIKI点击进入](https://github.com/OPQBOT/OPQ/wiki)
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
-
-
-
-Nuget
-
-```powershell
-//SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.19
-```
-
-
 
 #### 开发【直接使用本库】
 
