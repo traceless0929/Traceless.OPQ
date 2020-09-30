@@ -9,17 +9,6 @@ OPQ C# SDK 【netcore 3.1】
 
 我的测试环境：**Linux centos 3.10.0-1127.el7.x86_64**
 
-
-
-Nuget
-
-```powershell
-//SDK模块
-Install-Package Traceless.OPQSDK -Version 0.0.19
-```
-
-
-
 #### 开发【直接使用本库】
 
 1. clone本库
