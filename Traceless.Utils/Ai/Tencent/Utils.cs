@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -110,10 +111,11 @@ namespace Traceless.Utils.Ai.Tencent
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>
-        public static DateTime parseTexDtArr(int[] arr)
+        public static DateTime parseTexDtArr(List<int> arr)
         {
+            Console.WriteLine("[parseTexDtArr]" + JsonConvert.SerializeObject(arr));
             DateTime dt = DateTime.Now;
-            switch (arr.Length)
+            switch (arr.Count)
             {
                 case 1:
 

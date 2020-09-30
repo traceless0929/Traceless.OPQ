@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Traceless.Utils.Ai.Tencent.Model
@@ -53,8 +54,9 @@ namespace Traceless.Utils.Ai.Tencent.Model
             {
                 return entity_list.Where(p => p.type.name.Contains("time.generic")).Select(p =>
                 {
-                    int[] valArr = p.meaning.value;
-                    return Utils.parseTexDtArr(valArr);
+                    object[] valArr = p.meaning.value;
+                    List<int> list = p.meaning.value.Where(p => long.TryParse(p.ToString(), out _)).Select(p => Convert.ToInt32(p.ToString())).ToList();
+                    return Utils.parseTexDtArr(list);
                 }).ToList();
             }
         }
@@ -114,7 +116,7 @@ namespace Traceless.Utils.Ai.Tencent.Model
 
     public class Meaning
     {
-        public int[] value { get; set; }
-        public string[] related { get; set; }
+        public object[] value { get; set; }
+        public object[] related { get; set; }
     }
 }
