@@ -58,6 +58,17 @@ namespace Traceless.Utils.Ai.Tencent.Model
                 }).ToList();
             }
         }
+
+        /// <summary>
+        /// 获取wordList中语义为"CD"的分词并转化为数字
+        /// </summary>
+        public List<int> FindWordCd
+        {
+            get
+            {
+                return word_list.Where(p => p.tag == "CD").Select(p => (int)Chinese.ChineseNumber.GetNumber(p.str)).ToList();
+            }
+        }
     }
 
     public class Header
