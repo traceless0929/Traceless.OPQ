@@ -43,9 +43,23 @@ namespace Traceless.OPQSDK.Models.Msg
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static OPQCode Pic_Http(string url)
+        public static OPQCode Pic_Http(string url, bool isFlash = false)
         {
-            return new OPQCode(OPQFunction.Pic, new KeyValuePair<string, string>("url", url));
+            return new OPQCode(OPQFunction.Pic,
+                new KeyValuePair<string, string>("url", url), new KeyValuePair<string, string>("flash", isFlash + "")
+                );
+        }
+
+        /// <summary>
+        /// 图片码，会自动转换为path中的图片进行发送
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static OPQCode Pic_Path(string path, bool isFlash = false)
+        {
+            return new OPQCode(OPQFunction.Pic,
+                new KeyValuePair<string, string>("path", path), new KeyValuePair<string, string>("flash", isFlash + "")
+                );
         }
 
         /// <summary>
@@ -56,6 +70,16 @@ namespace Traceless.OPQSDK.Models.Msg
         public static OPQCode Voice_Http(string url)
         {
             return new OPQCode(OPQFunction.Voice, new KeyValuePair<string, string>("url", url));
+        }
+
+        /// <summary>
+        /// 语音码，会自动转换为path中的语音进行发送
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static OPQCode Voice_Path(string path)
+        {
+            return new OPQCode(OPQFunction.Voice, new KeyValuePair<string, string>("path", path));
         }
 
         /// <summary>

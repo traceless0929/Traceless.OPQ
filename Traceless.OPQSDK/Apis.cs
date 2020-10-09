@@ -56,30 +56,17 @@ namespace Traceless.OPQSDK
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <param name="changeCode">是否转换OPQ吗</param>
         /// <returns></returns>
-        public static MsgResp SendGroupMsg(long groupId, string txt = "", string pic = "", string voice = "", object json = null, bool changeCode = true)
+        public static MsgResp SendGroupMsg(long groupId, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt + voice + pic))
+            if (string.IsNullOrEmpty(txt))
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
-            SendMsgReq req = new SendMsgReq() { toUser = groupId, sendMsgType = "TextMsg", sendToType = 2, content = (txt == null ? "" : txt) };
-            if (!string.IsNullOrEmpty(voice))
+            SendMsgReq req = new SendMsgReq() { ToUserUid = groupId, SendMsgType = "TextMsg", SendToType = 2, Content = (txt == null ? "" : txt) };
+            if (null != json)
             {
-                req.content = "";
-                req.sendMsgType = "VoiceMsg";
-                req.voiceUrl = voice.StartsWith("http") ? voice : "";
-                req.voiceBase64Buf = voice.StartsWith("http") ? "" : voice;
-            }
-            else if (!string.IsNullOrEmpty(pic))
-            {
-                req.sendMsgType = "PicMsg";
-                req.picUrl = pic.StartsWith("http") ? pic : "";
-                req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
-            }
-            else if (null != json)
-            {
-                req.sendMsgType = "JsonMsg";
-                req.content = JsonConvert.SerializeObject(json);
+                req.SendMsgType = "JsonMsg";
+                req.Content = JsonConvert.SerializeObject(json);
             }
             return SendMsg(req, changeCode);
         }
@@ -92,30 +79,17 @@ namespace Traceless.OPQSDK
         /// <param name="voice">语音消息【http开头的网络地址，或base64内容】</param>
         /// <param name="pic">图片消息【http开头的网络地址，或base64内容】</param>
         /// <returns></returns>
-        public static MsgResp SendFriendMsg(long qq, string txt = "", string pic = "", string voice = "", object json = null, bool changeCode = true)
+        public static MsgResp SendFriendMsg(long qq, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt + voice + pic))
+            if (string.IsNullOrEmpty(txt))
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
-            SendMsgReq req = new SendMsgReq() { toUser = qq, sendMsgType = "TextMsg", sendToType = 1, content = (txt == null ? "" : txt) };
-            if (!string.IsNullOrEmpty(voice))
+            SendMsgReq req = new SendMsgReq() { ToUserUid = qq, SendMsgType = "TextMsg", SendToType = 1, Content = (txt == null ? "" : txt) };
+            if (null != json)
             {
-                req.content = "";
-                req.sendMsgType = "VoiceMsg";
-                req.voiceUrl = voice.StartsWith("http") ? voice : "";
-                req.voiceBase64Buf = voice.StartsWith("http") ? "" : voice;
-            }
-            else if (!string.IsNullOrEmpty(pic))
-            {
-                req.sendMsgType = "PicMsg";
-                req.picUrl = pic.StartsWith("http") ? pic : "";
-                req.picBase64Buf = pic.StartsWith("http") ? "" : pic;
-            }
-            else if (null != json)
-            {
-                req.sendMsgType = "JsonMsg";
-                req.content = JsonConvert.SerializeObject(json);
+                req.SendMsgType = "JsonMsg";
+                req.Content = JsonConvert.SerializeObject(json);
             }
             return SendMsg(req, changeCode);
         }
@@ -331,48 +305,49 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         private static MsgResp SendMsg(SendMsgReq req, bool changeCode)
         {
-            if (string.IsNullOrEmpty(req.content))
+            if (string.IsNullOrEmpty(req.Content))
             {
                 return new MsgResp() { Ret = 1 };
             }
-            Console.WriteLine($"[log]{(req.sendToType == 1 ? "好友" : (req.sendToType == 2 ? "群聊" : "私聊"))}给{req.toUser}->{req.content}");
-            List<OPQCode> codes = OPQCode.Parse(req.content);
+            Console.WriteLine($"[log]{(req.SendToType == 1 ? "好友" : (req.SendToType == 2 ? "群聊" : "私聊"))}给{req.ToUserUid}->{req.Content}");
+            List<OPQCode> codes = OPQCode.Parse(req.Content);
             if (changeCode)
             {
-                if (string.IsNullOrEmpty(req.picUrl))
+                if (string.IsNullOrEmpty(req.PicUrl))
                 {
                     codes.Where(p => p.Function == OPQFunction.Pic).ToList().ForEach(code =>
                       {
-                          req.sendMsgType = "PicMsg";
-                          req.picUrl = code.Items["url"];
-                          req.picBase64Buf = "";
-                          req.content = req.content.Replace(code.ToString(), "");
+                          req.SendMsgType = "PicMsg";
+                          req.PicUrl = code.Items.ContainsKey("url") ? code.Items["url"] : "";
+                          req.PicPath = code.Items.ContainsKey("path") ? code.Items["path"] : "";
+                          req.FlashPic = code.Items.ContainsKey("flash") ? false : ((code.Items["flash"] == (true + "") ? true : false));
+                          req.Content = req.Content.Replace(code.ToString(), "");
                       });
                 }
-                if (string.IsNullOrEmpty(req.voiceUrl))
+                if (string.IsNullOrEmpty(req.VoiceUrl))
                 {
                     codes.Where(p => p.Function == OPQFunction.Voice).ToList().ForEach(code =>
                       {
-                          req.sendMsgType = "VoiceMsg";
-                          req.voiceUrl = code.Items["url"];
-                          req.picBase64Buf = "";
-                          req.content = req.content.Replace(code.ToString(), "");
+                          req.SendMsgType = "VoiceMsg";
+                          req.VoiceUrl = code.Items.ContainsKey("url") ? code.Items["url"] : "";
+                          req.VoicePath = code.Items.ContainsKey("path") ? code.Items["path"] : "";
+                          req.Content = req.Content.Replace(code.ToString(), "");
                       });
                 }
                 codes.Where(p => p.Function == OPQFunction.Rich).ToList().ForEach(code =>
                     {
-                        req.sendMsgType = "JsonMsg";
-                        req.content = JsonConvert.SerializeObject(new RichCard(code.Items.GetValueOrDefault("title"), code.Items.GetValueOrDefault("desc"), code.Items.GetValueOrDefault("prompt"), code.Items.GetValueOrDefault("tag"), code.Items.GetValueOrDefault("url"), code.Items.GetValueOrDefault("preview")));
+                        req.SendMsgType = "JsonMsg";
+                        req.Content = JsonConvert.SerializeObject(new RichCard(code.Items.GetValueOrDefault("title"), code.Items.GetValueOrDefault("desc"), code.Items.GetValueOrDefault("prompt"), code.Items.GetValueOrDefault("tag"), code.Items.GetValueOrDefault("url"), code.Items.GetValueOrDefault("preview")));
                     });
             }
 
-            MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+            MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
             int i = 0;
             while (msg.Ret == 241 && i < 10)
             {
                 Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");
                 System.Threading.Thread.Sleep(1100);
-                msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsg", req);
+                msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
                 i++;
             }
             if (msg.Ret == 241)

@@ -52,12 +52,12 @@ namespace Traceless.Robot.Plugins
             if (msg.MsgType == MsgType.PicMsg)
             {
                 PicContent picContent = msg.GetPic();
-                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content + CodeUtils.At(msg.FromUserId), picContent.GroupPic.FirstOrDefault().Url);
+                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content + CodeUtils.At(msg.FromUserId) + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
                 VoiceContent voiceContent = msg.GetVoice();
-                Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content, "", voiceContent.Url);
+                Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
             }
             else
             {
@@ -78,12 +78,12 @@ namespace Traceless.Robot.Plugins
             if (msg.MsgType == MsgType.PicMsg)
             {
                 PicContent picContent = msg.GetPic();
-                Apis.SendFriendMsg(msg.FromUin, picContent.Content, picContent.FriendPic.FirstOrDefault().Url);
+                Apis.SendFriendMsg(msg.FromUin, picContent.Content + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
                 VoiceContent voiceContent = msg.GetVoice();
-                Apis.SendFriendMsg(msg.FromUin, voiceContent.Content, "", voiceContent.Url);
+                Apis.SendFriendMsg(msg.FromUin, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
             }
             else
             {
