@@ -73,8 +73,8 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 
 | API                  | 可用 | 测试过 | 备注                                                         |
 | --------------------- | ---- | ------ | ------------------------------------------------------------ |
-| 发群消息【图片、语音、文字】                | ✔    | ✔      |  |
-| 发好友消息【图片、语音、文字】                | ✔    | ✔      |  |
+| 发群消息【图片、语音、文字】                | ✔    | ✔      | 语音\图片采用在文本信息中加入OPQ码方式发送，简化发送接口  参考[MyPlugin](https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs)|
+| 发好友消息【图片、语音、文字】                | ✔    | ✔      | 语音\图片采用在文本信息中加入OPQ码方式发送，简化发送接口  参考[MyPlugin](https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs) |
 | 群组管理 | ✔ | ✔ | 加群 拉人 踢群 退群 |
 | 添加好友 | ✔ | ✔ |                                                              |
 | 获取好友列表 | ✔ | ✔ |                                                              |
