@@ -152,3 +152,9 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 [C# 插件 By:枫林](https://github.com/fenglindubu/IOTQQ_Socket)
 
 [仓鼠的QQ Bot框架-Java版本](https://github.com/MiniDay/HamsterBot-IOTQQ)
+
+---------------------  
+
+## License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ?ref=badge_shield)
