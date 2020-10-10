@@ -40,11 +40,13 @@ OPQ C# SDK 【netcore 3.1】
 
 ## 已完成
 
-5. 重构basePlugin，不再使用反射调用事件方法 ✔
-6. 增加OPQ码机制，功能类似酷Q码 ✔
-7. 修复了获取群列表和群成员列表出现的NPE问题 ✔
-8. 增加发送消息接口延迟等待机制，减少调用发送接口过于频繁产生消息丢失的可能性 ✔
-9. 增加腾讯AI平台-智能闲聊\语音合成 接口 ✔
+1. 重构basePlugin，不再使用反射调用事件方法 ✔
+2. 增加OPQ码机制，功能类似酷Q码 ✔
+3. 修复了获取群列表和群成员列表出现的NPE问题 ✔
+4. 增加发送消息接口延迟等待机制，减少调用发送接口过于频繁产生消息丢失的可能性 ✔
+5. 增加腾讯AI平台-智能闲聊\语音合成 接口 ✔
+6. 采用V6版本框架，发送消息使用SendMsgV2 ✔
+7. 简化发送消息接口，去除语音\图片参数，统一使用OPQ码 ✔
 
 #### 项目结构
 
@@ -58,6 +60,7 @@ Traceless.Utils：一些工具方法
 2. 腾讯AI开放平台-智能闲聊及语音合成（AILab）实现
 3. 随机工具类
 4. 腾讯文本理解工具与服务（使用AI分析自然语言）[说明文档](https://ai.tencent.com/ailab/nlp/texsmart/zh/index.html)
+5. QQ音乐搜索与获取
 
 Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也可以使用任何程序作为宿主程序
 
@@ -71,8 +74,8 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 
 | API                  | 可用 | 测试过 | 备注                                                         |
 | --------------------- | ---- | ------ | ------------------------------------------------------------ |
-| 发群消息【图片、语音、文字】                | ✔    | ✔      | 可能不会支持xml等，可自行根据webapi拓展 |
-| 发好友消息【图片、语音、文字】                | ✔    | ✔      | 可能不会支持xml等，可自行根据webapi拓展 |
+| 发群消息【图片、语音、文字】                | ✔    | ✔      | 语音\图片采用在文本信息中加入OPQ码方式发送，简化发送接口  参考[MyPlugin](https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs)|
+| 发好友消息【图片、语音、文字】                | ✔    | ✔      | 语音\图片采用在文本信息中加入OPQ码方式发送，简化发送接口  参考[MyPlugin](https://github.com/traceless0929/Traceless.OPQ/blob/master/Traceless.Robot/Plugins/MyPlugin.cs) |
 | 群组管理 | ✔ | ✔ | 加群 拉人 踢群 退群 |
 | 添加好友 | ✔ | ✔ |                                                              |
 | 获取好友列表 | ✔ | ✔ |                                                              |
@@ -139,8 +142,8 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 | AT人     | [ATUSER(QQ号)]             | AT某个人             | ✔           |                                                          |
 | AT全体   | [ATALL()]                  | AT全体               | ✔           |                                                          |
 | 获取昵称 | [GETUSERNICK(QQ号)]        | 获取某个人的QQ昵称   | ✔           |                                                          |
-| 网络图片 | [CODE:pic,url=网络图片URL] | 表示发送某张网络图片 | ✖           | 网络图片需要带https/http标头                             |
-| 语音     | CODE:voice,url=语音URL]    | 表示发送某段语音     | ✖           | 语音URL为OPQ语音消息返回体中的url，暂不支持自定义网络url |
+| 网络图片 | [CODE:pic,url=网络图片URL,path=本地图片路径,flash=是否闪照] | 表示发送某张网络\本地图片 | ✖           | 网络图片需要带https/http标头                             |
+| 语音     | CODE:voice,url=语音URL,path=本地语音路径]    | 表示发送某段网络\本地语音     | ✖           | 语音URL为OPQ语音消息返回体中的url，暂不支持自定义网络url |
 | 富文本分享卡片     | [CODE:rich,url=跳转地址,title=标题,desc=描述,prompt=在聊天列表里的缩略信息,preview=缩略图,tag=左角标的说明]    | 表示发送具有点击跳转功能的卡片     | ✖           | 地址\缩略图 需要http(s)地址 |
 
 
@@ -150,6 +153,8 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 
 [仓鼠的QQ Bot框架-Java版本](https://github.com/MiniDay/HamsterBot-IOTQQ)
 
-### 个人项目截图
+---------------------  
 
-![运行图](https://image.cdn.traceless.site/picgo/B693CC48-99DF-4cd9-9B23-7C6A41B5392E.png)
+## License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ?ref=badge_large)
