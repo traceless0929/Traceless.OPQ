@@ -58,7 +58,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static MsgResp SendGroupMsg(long groupId, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt))
+            if (string.IsNullOrEmpty(txt)&&null==json)
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
