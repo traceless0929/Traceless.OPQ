@@ -346,7 +346,7 @@ namespace Traceless.OPQSDK
             while (msg.Ret == 241 && i < 10)
             {
                 Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");
-                System.Threading.Thread.Sleep(1100);
+                Task.Delay(1100);
                 msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
                 i++;
             }
