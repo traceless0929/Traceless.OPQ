@@ -105,6 +105,28 @@ namespace Traceless.OPQSDK.Models.Msg
         }
 
         /// <summary>
+        /// 分享音乐
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="desc">描述</param>
+        /// <param name="prompt">聊天列表的缩略消息</param>
+        /// <param name="tag">左下角标志</param>
+        /// <param name="url">跳转地址</param>
+        /// <param name="preview">缩略图</param>
+        /// <returns></returns>
+        public static OPQCode Music(string title, string desc = "", string prompt = "[卡片消息]", string tag = "", string url = "", string preview = "")
+        {
+            return new OPQCode(OPQFunction.Rich,
+                new KeyValuePair<string, string>("url", url),
+                new KeyValuePair<string, string>("title", title),
+                new KeyValuePair<string, string>("desc", desc),
+                new KeyValuePair<string, string>("prompt", prompt),
+                new KeyValuePair<string, string>("preview", preview),
+                new KeyValuePair<string, string>("tag", tag)
+                );
+        }
+
+        /// <summary>
         /// 解析文本中的OPQ码
         /// </summary>
         /// <param name="raw"></param>

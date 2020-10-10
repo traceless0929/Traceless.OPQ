@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Traceless.OPQSDK</PackageId>
-    <Version>0.0.22</Version>
+    <Version>0.0.23</Version>
     <Authors>Traceless</Authors>
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore</PackageDescription>
@@ -20,5 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Traceless.SocketIO\Traceless.SocketIO.csproj" />
     <ProjectReference Include="..\Traceless.Utils\Traceless.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Content\Card\Xml\" />
   </ItemGroup>
 </Project>

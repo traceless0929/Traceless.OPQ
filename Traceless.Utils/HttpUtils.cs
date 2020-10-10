@@ -67,14 +67,14 @@ namespace Traceless.Utils
             return default(T);
         }
 
-        private async static Task<HttpResponseMessage> PostAsync(string url, string postStr, string contentType = "application/json")
+        public async static Task<HttpResponseMessage> PostAsync(string url, string postStr, string contentType = "application/json")
         {
             ITrHttpClientFactory factory = new TrHttpClientFactory();
             var client = factory.CreateHttpClient();
             return await client.PostAsync(url, postStr, contentType);
         }
 
-        private async static Task<HttpResponseMessage> GetAsync(string url)
+        public async static Task<HttpResponseMessage> GetAsync(string url)
         {
             ITrHttpClientFactory factory = new TrHttpClientFactory();
             var client = factory.CreateHttpClient();

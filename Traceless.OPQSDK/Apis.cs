@@ -81,7 +81,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static MsgResp SendFriendMsg(long qq, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt))
+            if (string.IsNullOrEmpty(txt)&&null==json)
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
@@ -340,7 +340,7 @@ namespace Traceless.OPQSDK
                         req.Content = JsonConvert.SerializeObject(new RichCard(code.Items.GetValueOrDefault("title"), code.Items.GetValueOrDefault("desc"), code.Items.GetValueOrDefault("prompt"), code.Items.GetValueOrDefault("tag"), code.Items.GetValueOrDefault("url"), code.Items.GetValueOrDefault("preview")));
                     });
             }
-
+            Console.WriteLine($"[DEBUG]{JsonConvert.SerializeObject(req)}");
             MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
             int i = 0;
             while (msg.Ret == 241 && i < 10)
