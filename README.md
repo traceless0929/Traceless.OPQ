@@ -157,4 +157,4 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 
 ## License
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftraceless0929%2FTraceless.OPQ?ref=badge_large)
