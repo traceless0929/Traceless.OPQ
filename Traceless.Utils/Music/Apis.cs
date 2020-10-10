@@ -18,6 +18,10 @@ namespace Traceless.Utils.Music
             if (responseMessage.Result.IsSuccessStatusCode)
             {
                 string resp = responseMessage.Result.Content.ReadAsStringAsync().Result;
+                if (resp.Contains("no results"))
+                {
+                    return null;
+                }
                 resp = resp.Substring(9, resp.Length - 10);
                 return JsonConvert.DeserializeObject<QQMusicResp>(resp);
             }

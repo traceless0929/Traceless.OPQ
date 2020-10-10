@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Traceless.OPQSDK.Models.Content.Card.Json
 {
-    
     public class BaseMeta
     {
-        [JsonProperty(NullValueHandling=NullValueHandling.Ignore)]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public News news { get; set; } = null;
-        [JsonProperty(NullValueHandling=NullValueHandling.Ignore)]
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Music music { get; set; } = null;
     }
 
@@ -125,7 +125,7 @@ namespace Traceless.OPQSDK.Models.Content.Card.Json
     public class Config
     {
         public bool autosize { get; set; } = true;
-        public int ctime { get; set; } = 0;
+        public long ctime { get; set; } = 0;
         public bool forward { get; set; } = true;
         public string token { get; set; } = "4826e6790057fc7a4fcbe5ac71475fce";
         public string type { get; set; } = "normal";
