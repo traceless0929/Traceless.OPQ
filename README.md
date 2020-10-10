@@ -60,6 +60,7 @@ Traceless.Utils：一些工具方法
 2. 腾讯AI开放平台-智能闲聊及语音合成（AILab）实现
 3. 随机工具类
 4. 腾讯文本理解工具与服务（使用AI分析自然语言）[说明文档](https://ai.tencent.com/ailab/nlp/texsmart/zh/index.html)
+5. QQ音乐搜索与获取
 
 Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也可以使用任何程序作为宿主程序
 
