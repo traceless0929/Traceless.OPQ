@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Event
+﻿namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// 加好友成功后的通知回馈

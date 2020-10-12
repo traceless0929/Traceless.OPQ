@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Content
+﻿namespace Traceless.OPQSDK.Models.Content
 {
     public class RepContent : AtContent
     {

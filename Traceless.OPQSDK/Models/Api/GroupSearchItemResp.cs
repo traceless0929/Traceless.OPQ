@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Api
+﻿namespace Traceless.OPQSDK.Models.Api
 {
     /// <summary>
     /// 搜索群组返回

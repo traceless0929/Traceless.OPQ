@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Api
+﻿namespace Traceless.OPQSDK.Models.Api
 {
     /// <summary>
     /// 获取好友列表请求 返回json中 StartIndex == Friend_count 说明拉取好友列表完毕 否则 传入StartIndex 继续请求

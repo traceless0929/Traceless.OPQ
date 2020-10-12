@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Msg
+﻿namespace Traceless.OPQSDK.Models.Msg
 {
     /// <summary>
     /// 消息类型。[G]:支持群消息，[F]:支持好友消息，未注明表示暂未支持解析

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Event
+﻿namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// QQ登录\离线\网络波动 事件参数

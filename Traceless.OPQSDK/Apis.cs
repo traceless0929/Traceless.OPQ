@@ -1,19 +1,15 @@
 ﻿using Newtonsoft.Json;
-using Traceless.OPQSDK.Models.Api;
-using Traceless.Utils.Http;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using Traceless.OPQSDK.Models.Event;
-using Traceless.OPQSDK.Models;
-using Traceless.OPQSDK.Plugin;
-using Traceless.OPQSDK.Models.Msg;
-using Traceless.Utils;
-using System.Xml;
+using System.Threading;
+using System.Threading.Tasks;
+using Traceless.OPQSDK.Models.Api;
 using Traceless.OPQSDK.Models.Content.Card.Json;
+using Traceless.OPQSDK.Models.Event;
+using Traceless.OPQSDK.Models.Msg;
+using Traceless.OPQSDK.Plugin;
+using Traceless.Utils;
 
 namespace Traceless.OPQSDK
 {
@@ -58,7 +54,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static MsgResp SendGroupMsg(long groupId, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt)&&null==json)
+            if (string.IsNullOrEmpty(txt) && null == json)
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
@@ -81,7 +77,7 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static MsgResp SendFriendMsg(long qq, string txt = "", object json = null, bool changeCode = true)
         {
-            if (string.IsNullOrEmpty(txt)&&null==json)
+            if (string.IsNullOrEmpty(txt) && null == json)
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
@@ -346,7 +342,7 @@ namespace Traceless.OPQSDK
             while (msg.Ret == 241 && i < 10)
             {
                 Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");
-                Task.Delay(1100);
+                Thread.Sleep(1100);
                 msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
                 i++;
             }

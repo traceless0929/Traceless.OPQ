@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Traceless.OPQSDK.Models.Msg
+﻿namespace Traceless.OPQSDK.Models.Msg
 {
     /// <summary>
     /// 群消息

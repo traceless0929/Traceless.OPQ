@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Api
+﻿namespace Traceless.OPQSDK.Models.Api
 {
     /// <summary>
     /// QQ群功能包：加群 拉人 踢群 退群

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Event
+﻿namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// 群管理变更-机器人是不是管理员都能收到此群管变更事件

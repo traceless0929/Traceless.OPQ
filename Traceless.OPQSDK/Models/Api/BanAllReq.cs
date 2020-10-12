@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Api
+﻿namespace Traceless.OPQSDK.Models.Api
 {
     /// <summary>
     /// 全体禁言请求类

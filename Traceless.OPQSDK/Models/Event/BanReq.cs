@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Event
+﻿namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// 禁言请求类

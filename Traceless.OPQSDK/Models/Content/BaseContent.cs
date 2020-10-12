@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.OPQSDK.Models.Content

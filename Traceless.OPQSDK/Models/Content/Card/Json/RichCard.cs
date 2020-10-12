@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models.Content.Card.Json
+﻿namespace Traceless.OPQSDK.Models.Content.Card.Json
 {
     public class RichCard
     {

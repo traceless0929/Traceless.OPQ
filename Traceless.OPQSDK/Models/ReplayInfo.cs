@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Traceless.OPQSDK.Models
+﻿namespace Traceless.OPQSDK.Models
 {
     public class ReplayInfo
     {

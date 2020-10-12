@@ -1,11 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Traceless.OPQSDK;
-using Traceless.OPQSDK.Models.Content;
-using Traceless.OPQSDK.Models.Event;
+﻿using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.OPQSDK.Plugin
