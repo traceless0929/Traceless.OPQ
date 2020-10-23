@@ -1,4 +1,5 @@
-﻿using Traceless.OPQSDK.Models.Event;
+﻿using System;
+using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models.Msg;
 
 namespace Traceless.OPQSDK.Plugin
@@ -172,6 +173,10 @@ namespace Traceless.OPQSDK.Plugin
         /// 插件初始化
         /// </summary>
         /// <param name="currentQQ"></param>
-        public abstract void PluginInit(long currentQQ);
+        public virtual void PluginInit(long currentQQ)
+        {
+            Console.WriteLine(
+                $"插件初始化 \n[{AppId}({pluginName})]\n优先级:{PluginPriority}\n作者：{pluginAuthor}\n描述：{PluginDescription}");
+        }
     }
 }

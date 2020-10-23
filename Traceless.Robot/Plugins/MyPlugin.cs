@@ -1,19 +1,18 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
 using Traceless.OPQSDK;
-using Traceless.OPQSDK.Models.Content;
+using Traceless.OPQSDK.Models.Api;
 using Traceless.OPQSDK.Models.Event;
 using Traceless.OPQSDK.Models.Msg;
+using Traceless.OPQSDK.Plugin;
 
 namespace Traceless.Robot.Plugins
 {
     /// <summary>
     /// 示例插件 所有事件若不想使用可以直接去除事件代码
     /// </summary>
-    public class MyPlugin : OPQSDK.Plugin.BasePlugin
+    public class MyPlugin : BasePlugin
     {
         /// <summary>
         /// 插件名
@@ -48,22 +47,26 @@ namespace Traceless.Robot.Plugins
         public override int GroupMsgProcess(GroupMsg msg, long CurrentQQ)
         {
             Console.WriteLine($"GroupMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
-            if (msg.FromGroupId != 516141713) { return 0; }
+            if (msg.FromGroupId != 516141713) return 0;
             if (msg.MsgType == MsgType.PicMsg)
             {
-                PicContent picContent = msg.GetPic();
-                Apis.SendGroupMsg(msg.FromGroupId, picContent.Content + CodeUtils.At(msg.FromUserId) + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
+                var picContent = msg.GetPic();
+                Apis.SendGroupMsg(msg.FromGroupId,
+                    picContent.Content + CodeUtils.At(msg.FromUserId) +
+                    CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
-                VoiceContent voiceContent = msg.GetVoice();
+                var voiceContent = msg.GetVoice();
                 Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
             }
             else
             {
                 Apis.SendGroupMsg(msg.FromGroupId, msg.Content + CodeUtils.At(msg.FromUserId));
             }
-            Apis.RevokeMsg(new OPQSDK.Models.Api.RevokeMsgReq { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
+
+            Apis.RevokeMsg(new RevokeMsgReq
+            { GroupID = msg.FromGroupId, MsgRandom = msg.MsgRandom, MsgSeq = msg.MsgRandom });
             return 0;
         }
 
@@ -77,12 +80,13 @@ namespace Traceless.Robot.Plugins
             Console.WriteLine($"FriendMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
             if (msg.MsgType == MsgType.PicMsg)
             {
-                PicContent picContent = msg.GetPic();
-                Apis.SendFriendMsg(msg.FromUin, picContent.Content + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
+                var picContent = msg.GetPic();
+                Apis.SendFriendMsg(msg.FromUin,
+                    picContent.Content + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
             }
             else if (msg.MsgType == MsgType.VoiceMsg)
             {
-                VoiceContent voiceContent = msg.GetVoice();
+                var voiceContent = msg.GetVoice();
                 Apis.SendFriendMsg(msg.FromUin, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
             }
             else
@@ -266,7 +270,7 @@ namespace Traceless.Robot.Plugins
         /// <param name="currentQQ"></param>
         public override void PluginInit(long currentQQ)
         {
-            Console.WriteLine($"插件初始化 \n[{this.AppId}({this.pluginName})]\n优先级:{this.PluginPriority}\n作者：{this.pluginAuthor}\n描述：{this.PluginDescription}");
+            base.PluginInit(currentQQ);
         }
     }
 }
