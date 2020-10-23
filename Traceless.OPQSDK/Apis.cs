@@ -316,7 +316,7 @@ namespace Traceless.OPQSDK
                           req.SendMsgType = "PicMsg";
                           req.PicUrl = code.Items.ContainsKey("url") ? code.Items["url"] : "";
                           req.PicPath = code.Items.ContainsKey("path") ? code.Items["path"] : "";
-                          req.FlashPic = code.Items.ContainsKey("flash") ? false : ((code.Items["flash"] == (true + "") ? true : false));
+                          req.FlashPic = !code.Items.ContainsKey("flash") && ((code.Items["flash"] == (true + "") ? true : false));
                           req.Content = req.Content.Replace(code.ToString(), "");
                       });
                 }
