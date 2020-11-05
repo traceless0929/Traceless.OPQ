@@ -37,5 +37,15 @@
         /// 事件类型
         /// </summary>
         public EventType EventName { get; set; }
+
+        public BaseEvent<E> Clone<E>(E data)
+        {
+            BaseEvent<E> res=new BaseEvent<E>();
+            res.EventMsg = this.EventMsg;
+            res.EventName = this.EventName;
+            res.EventData = data;
+            return res;
+
+        }
     }
 }

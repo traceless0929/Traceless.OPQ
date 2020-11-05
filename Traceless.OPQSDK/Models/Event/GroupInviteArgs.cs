@@ -1,4 +1,6 @@
-﻿namespace Traceless.OPQSDK.Models.Event
+﻿using Newtonsoft.Json;
+
+namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// 群邀请事件回调参数
@@ -83,6 +85,25 @@
         {
             this.Action = action;
             Apis.AnswerInviteGroup(this);
+        }
+
+        /// <summary>
+        /// 转换为退群消息
+        /// </summary>
+        /// <returns></returns>
+        public C_GroupExitArgs ConvertToGroupExit()
+        {
+            return new C_GroupExitArgs
+            {
+                Type = this.Type,
+                Who = this.Who,
+                WhoName = this.WhoName,
+                ActionName = this.ActionName,
+                ActionUin = this.ActionUin,
+                GroupId = this.GroupId,
+                GroupName = this.GroupName,
+                ActionGroupCard = this.ActionGroupCard
+            };
         }
     }
 }

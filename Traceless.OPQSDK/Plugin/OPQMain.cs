@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -224,8 +225,20 @@ namespace Traceless.OPQSDK.Plugin
                                 baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMINSYSNOTIFY:
-                                        instance.EventQQGroupInvite(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupInviteArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
-                                        break;
+                                    {
+                                        var nowItem = JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupInviteArgs>>>(msgText);
+                                        switch (nowItem.CurrentPacket.Data.EventData.Type)
+                                        {
+                                            case 5:
+                                                instance.EventQQGroupExit(nowItem.CurrentPacket.Data.Clone(nowItem.CurrentPacket.Data.EventData.ConvertToGroupExit()),baseData.CurrentQQ);
+                                                break;
+                                            default:
+                                                instance.EventQQGroupInvite(nowItem.CurrentPacket.Data, baseData.CurrentQQ);
+                                                break;
+                                        }
+                                        
+                                    }
+                                     break;
                                 }
                             }
                         }

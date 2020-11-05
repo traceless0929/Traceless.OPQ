@@ -168,6 +168,13 @@ namespace Traceless.OPQSDK.Plugin
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
         public abstract void EventQQGroupInvite(BaseEvent<GroupInviteArgs> msg, long currentQQ);
+        
+        /// <summary>
+        /// 退群事件【主动、被踢】
+        /// </summary>
+        /// <param name="msg">消息体</param>
+        /// <param name="currentQQ">当前机器人QQ</param>
+        public abstract void EventQQGroupExit(BaseEvent<C_GroupExitArgs> msg, long currentQQ);
 
         /// <summary>
         /// 插件初始化

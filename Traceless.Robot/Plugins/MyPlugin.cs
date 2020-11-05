@@ -265,6 +265,16 @@ namespace Traceless.Robot.Plugins
         }
 
         /// <summary>
+        /// 有人退群
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="currentQQ"></param>
+        public override void EventQQGroupExit(BaseEvent<C_GroupExitArgs> msg, long currentQQ)
+        {
+            Console.WriteLine($"EventQQGroupExit {currentQQ}\n" + JsonConvert.SerializeObject(msg));
+        }
+
+        /// <summary>
         /// 插件初始化
         /// </summary>
         /// <param name="currentQQ"></param>
