@@ -215,7 +215,7 @@ namespace Traceless.Robot.Plugins
         }
 
         /// <summary>
-        /// 加群请求
+        /// 加群相关，加群请求、成功入群
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="currentQQ"></param>
@@ -269,9 +269,29 @@ namespace Traceless.Robot.Plugins
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="currentQQ"></param>
-        public override void EventQQGroupExit(BaseEvent<C_GroupExitArgs> msg, long currentQQ)
+        public override void EventQQGroupExit(BaseEvent<GroupInviteArgs> msg, long currentQQ)
         {
             Console.WriteLine($"EventQQGroupExit {currentQQ}\n" + JsonConvert.SerializeObject(msg));
+        }
+
+        /// <summary>
+        /// 有人提交加群申请
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="currentQQ"></param>
+        public override void EventQQGroupJoinSub(BaseEvent<GroupInviteArgs> msg, long currentQQ)
+        {
+            Console.WriteLine($"EventQQGroupJoinSub {currentQQ}\n" + JsonConvert.SerializeObject(msg));
+        }
+
+        /// <summary>
+        /// 加群申请被批准
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="currentQQ"></param>
+        public override void EventQQGroupJoinSubAgree(BaseEvent<GroupInviteArgs> msg, long currentQQ)
+        {
+            Console.WriteLine($"EventQQGroupJoinSub {currentQQ}\n" + JsonConvert.SerializeObject(msg));
         }
 
         /// <summary>

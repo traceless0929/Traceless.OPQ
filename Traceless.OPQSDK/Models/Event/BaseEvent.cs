@@ -1,4 +1,6 @@
-﻿namespace Traceless.OPQSDK.Models.Event
+﻿using System;
+
+namespace Traceless.OPQSDK.Models.Event
 {
     /// <summary>
     /// 基础事件
@@ -38,12 +40,12 @@
         /// </summary>
         public EventType EventName { get; set; }
 
-        public BaseEvent<E> Clone<E>(E data)
+        public BaseEvent<E> CloneObj<E>()
         {
             BaseEvent<E> res=new BaseEvent<E>();
             res.EventMsg = this.EventMsg;
             res.EventName = this.EventName;
-            res.EventData = data;
+            res.EventData = (E) (object) this.EventData;
             return res;
 
         }

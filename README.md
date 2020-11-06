@@ -47,6 +47,7 @@ OPQ C# SDK 【netcore 3.1】
 5. 增加腾讯AI平台-智能闲聊\语音合成 接口 ✔
 6. 采用V6版本框架，发送消息使用SendMsgV2 ✔
 7. 简化发送消息接口，去除语音\图片参数，统一使用OPQ码 ✔
+8. 拆分原先的**EventQQGroupInvite** 为 1入群请求\2加群请求被同意\5退群，不再需要在**EventQQGroupInvite**中按照Type判断了【其他ttype类型功能不明，仍然在该事件中回调】 ✔
 
 #### 项目结构
 
@@ -153,7 +154,7 @@ Traceless.Robot：SDK宿主程序，本DEMO实用Netcore控制台程序，你也
 
 [仓鼠的QQ Bot框架-Java版本](https://github.com/MiniDay/HamsterBot-IOTQQ)
 
----------------------  
+---------------------
 
 ## License
 

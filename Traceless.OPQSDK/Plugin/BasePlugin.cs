@@ -133,7 +133,7 @@ namespace Traceless.OPQSDK.Plugin
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
         public abstract void EventQQGroupTitleChange(BaseEvent<GroupTitleChangeArgs> msg, long currentQQ);
-
+        
         /// <summary>
         /// 加群相关，加群请求、成功入群
         /// </summary>
@@ -174,8 +174,21 @@ namespace Traceless.OPQSDK.Plugin
         /// </summary>
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
-        public abstract void EventQQGroupExit(BaseEvent<C_GroupExitArgs> msg, long currentQQ);
+        public abstract void EventQQGroupExit(BaseEvent<GroupInviteArgs> msg, long currentQQ);
 
+        /// <summary>
+        /// 有入群请求
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="currentQQ"></param>
+        public abstract void EventQQGroupJoinSub(BaseEvent<GroupInviteArgs> msg, long currentQQ);
+
+        /// <summary>
+        /// 有人成功加入群【加群申请被同意】
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="currentQQ"></param>
+        public abstract void EventQQGroupJoinSubAgree(BaseEvent<GroupInviteArgs> msg, long currentQQ);
         /// <summary>
         /// 插件初始化
         /// </summary>

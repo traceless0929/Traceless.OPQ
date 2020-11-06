@@ -13,7 +13,7 @@ namespace Traceless.OPQSDK.Models.Event
         public long Seq { get; set; }
 
         /// <summary>
-        /// 类型 1入群 ActionUin=0表示有人邀请,=0表示申请入群 2有人加群申请被同意 5退群 ActionUin=0表示有人踢出,=0表示主动退群
+        /// 类型 1入群 ActionUin>0表示有人邀请,=0表示申请入群 2有人加群申请被同意 5退群 ActionUin=0表示有人踢出,=0表示主动退群
         /// </summary>
         public int Type { get; set; }
 
@@ -71,6 +71,11 @@ namespace Traceless.OPQSDK.Models.Event
         /// 邀请人(处理人)群名片
         /// </summary>
         public string ActionGroupCard { get; set; }
+        
+        /// <summary>
+        /// 是否主动
+        /// </summary>
+        public bool Initiative => ActionUin == 0;
 
         /// <summary>
         /// --11 同意 14 忽略 21 拒绝
@@ -86,24 +91,6 @@ namespace Traceless.OPQSDK.Models.Event
             this.Action = action;
             Apis.AnswerInviteGroup(this);
         }
-
-        /// <summary>
-        /// 转换为退群消息
-        /// </summary>
-        /// <returns></returns>
-        public C_GroupExitArgs ConvertToGroupExit()
-        {
-            return new C_GroupExitArgs
-            {
-                Type = this.Type,
-                Who = this.Who,
-                WhoName = this.WhoName,
-                ActionName = this.ActionName,
-                ActionUin = this.ActionUin,
-                GroupId = this.GroupId,
-                GroupName = this.GroupName,
-                ActionGroupCard = this.ActionGroupCard
-            };
-        }
+        
     }
 }

@@ -158,82 +158,78 @@ namespace Traceless.OPQSDK.Plugin
                         {
                             foreach (var instance in _instanceBag)
                             {
+                                var raw = JsonConvert.DeserializeObject<BaseData<BaseEvent<object>>>(msgText);
                                 switch (baseData.CurrentPacket.Data.EventMsg.MsgType)
                                 {
                                     case EventType.ON_EVENT_QQ_LOGIN_SUCC:
-                                        instance.EventQQLogin(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
+                                        instance.EventQQLogin(raw.CurrentPacket.Data.CloneObj<QNetArgs>(), baseData.CurrentQQ);
                                         break;
 
                                     case EventType.ON_EVENT_QQ_OFFLINE:
-                                        instance.EventQQOffline(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data, baseData.CurrentQQ);
+                                        instance.EventQQOffline(raw.CurrentPacket.Data.CloneObj<QNetArgs>(), baseData.CurrentQQ);
                                         break;
 
                                     case EventType.ON_EVENT_QQ_NETWORK_CHANGE:
-                                        instance.EventFramNetChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<QNetArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventFramNetChange(raw.CurrentPacket.Data.CloneObj<QNetArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_ADD_STATUS:
-                                        instance.EventQQFriendAddRet(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqRetArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQFriendAddRet(raw.CurrentPacket.Data.CloneObj<FriendAddReqRetArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_NOTIFY_PUSHADDFRD:
-                                        instance.EventQQFriendAddPush(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddPushArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQFriendAddPush(raw.CurrentPacket.Data.CloneObj<FriendAddPushArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_ADDED:
-                                        instance.EventQQFriendAddReq(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendAddReqArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQFriendAddReq(raw.CurrentPacket.Data.CloneObj<FriendAddReqArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_EXIT_SUCC:
-                                        instance.EventQQGroupExitSuc(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitSucArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupExitSuc(raw.CurrentPacket.Data.CloneObj<GroupExitSucArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_REVOKE:
-                                        instance.EventQQFriendRevoke(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendRevokeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQFriendRevoke(raw.CurrentPacket.Data.CloneObj<FriendRevokeArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_SHUT:
-                                        instance.EventQQGroupShut(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupShutArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupShut(raw.CurrentPacket.Data.CloneObj<GroupShutArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_FRIEND_DELETE:
-                                        instance.EventQQFriendDelete(JsonConvert.DeserializeObject<BaseData<BaseEvent<FriendDeletArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQFriendDelete(raw.CurrentPacket.Data.CloneObj<FriendDeletArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_REVOKE:
-                                        instance.EventQQGroupRevoke(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupRevokeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupRevoke(raw.CurrentPacket.Data.CloneObj<GroupRevokeArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_UNIQUETITTLE_CHANGED:
-                                        instance.EventQQGroupTitleChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupTitleChangeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupTitleChange(raw.CurrentPacket.Data.CloneObj<GroupTitleChangeArgs>(),baseData.CurrentQQ); break;
 
-                                    case EventType.ON_EVENT_GROUP_JOIN:
-                                        instance.EventQQGroupJoin(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinReqArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                    // case EventType.ON_EVENT_GROUP_JOIN:
+                                    //     instance.EventQQGroupJoin(raw.CurrentPacket.Data.CloneObj<GroupJoinReqArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMIN:
-                                        instance.EventQQGroupAdminChange(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupAdminChangeArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupAdminChange(raw.CurrentPacket.Data.CloneObj<GroupAdminChangeArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_EXIT:
-                                        instance.EventQQGroupExitPush(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupExitPushArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupExitPush(raw.CurrentPacket.Data.CloneObj<GroupExitPushArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_JOIN_SUCC:
-                                        instance.EventQQGroupJoinSuc(JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupJoinSucArgs>>>(msgText).CurrentPacket.Data,
-                                baseData.CurrentQQ); break;
+                                        instance.EventQQGroupJoinSuc(raw.CurrentPacket.Data.CloneObj<GroupJoinSucArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMINSYSNOTIFY:
                                     {
-                                        var nowItem = JsonConvert.DeserializeObject<BaseData<BaseEvent<GroupInviteArgs>>>(msgText);
-                                        switch (nowItem.CurrentPacket.Data.EventData.Type)
+                                        var nowItem = raw.CurrentPacket.Data.CloneObj<GroupInviteArgs>();
+                                        switch (nowItem.EventData.Type)
                                         {
+                                            //入群请求
+                                            case 1:
+                                                instance.EventQQGroupJoinSub(nowItem,baseData.CurrentQQ);
+                                                break;
+                                            //加群请求被同意
+                                            case 2:
+                                                instance.EventQQGroupJoinSubAgree(nowItem,baseData.CurrentQQ);
+                                                break;
+                                            //退群
                                             case 5:
-                                                instance.EventQQGroupExit(nowItem.CurrentPacket.Data.Clone(nowItem.CurrentPacket.Data.EventData.ConvertToGroupExit()),baseData.CurrentQQ);
+                                                instance.EventQQGroupExit(nowItem,baseData.CurrentQQ);
                                                 break;
                                             default:
-                                                instance.EventQQGroupInvite(nowItem.CurrentPacket.Data, baseData.CurrentQQ);
+                                                instance.EventQQGroupInvite(nowItem, baseData.CurrentQQ);
                                                 break;
                                         }
                                         
