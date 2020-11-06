@@ -199,8 +199,8 @@ namespace Traceless.OPQSDK.Plugin
                                     case EventType.ON_EVENT_GROUP_UNIQUETITTLE_CHANGED:
                                         instance.EventQQGroupTitleChange(raw.CurrentPacket.Data.CloneObj<GroupTitleChangeArgs>(),baseData.CurrentQQ); break;
 
-                                    // case EventType.ON_EVENT_GROUP_JOIN:
-                                    //     instance.EventQQGroupJoin(raw.CurrentPacket.Data.CloneObj<GroupJoinReqArgs>(),baseData.CurrentQQ); break;
+                                    case EventType.ON_EVENT_GROUP_JOIN:
+                                        instance.EventQQGroupJoin(raw.CurrentPacket.Data.CloneObj<GroupJoinReqArgs>(),baseData.CurrentQQ); break;
 
                                     case EventType.ON_EVENT_GROUP_ADMIN:
                                         instance.EventQQGroupAdminChange(raw.CurrentPacket.Data.CloneObj<GroupAdminChangeArgs>(),baseData.CurrentQQ); break;
