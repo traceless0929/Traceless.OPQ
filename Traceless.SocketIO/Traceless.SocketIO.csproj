@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Traceless.SocketIO</PackageId>
     <Version>0.0.4</Version>
@@ -9,6 +8,8 @@
     <Company>GitHub</Company>
     <PackageDescription>OPQ Sdk For Netcore，Part Of Socket</PackageDescription>
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
+    <LangVersion>9</LangVersion>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Traceless.Utils</PackageId>
     <Version>0.0.9</Version>
@@ -10,6 +9,8 @@
     <PackageDescription>OPQ Sdk For Netcore,Part Of Util</PackageDescription>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
+    <LangVersion>9</LangVersion>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
