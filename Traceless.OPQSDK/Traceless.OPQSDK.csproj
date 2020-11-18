@@ -9,9 +9,12 @@
     <PackageDescription>OPQ Sdk For Netcore</PackageDescription>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
-    <PackageVersion>0.0.29</PackageVersion>
+    <PackageVersion>0.0.30</PackageVersion>
     <LangVersion>8</LangVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Title>Traceless.OPQSDK</Title>
+    <Copyright>Traceless</Copyright>
+    <PackageProjectUrl>https://github.com/traceless0929/Traceless.OPQ</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
