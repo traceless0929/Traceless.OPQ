@@ -163,28 +163,28 @@ namespace Traceless.OPQSDK.Plugin
         public abstract void EventQQGroupJoinSuc(BaseEvent<GroupJoinSucArgs> msg, long currentQQ);
 
         /// <summary>
-        /// 入群相关，被邀请、主动申请
+        /// 入群相关，被邀请、主动申请[机器人需要是管理员]
         /// </summary>
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
         public abstract void EventQQGroupInvite(BaseEvent<GroupInviteArgs> msg, long currentQQ);
         
         /// <summary>
-        /// 退群事件【主动、被踢】
+        /// 退群事件【主动、被踢】[机器人需要是管理员]
         /// </summary>
         /// <param name="msg">消息体</param>
         /// <param name="currentQQ">当前机器人QQ</param>
         public abstract void EventQQGroupExit(BaseEvent<GroupInviteArgs> msg, long currentQQ);
 
         /// <summary>
-        /// 有入群请求
+        /// 有入群请求[机器人需要是管理员]
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="currentQQ"></param>
         public abstract void EventQQGroupJoinSub(BaseEvent<GroupInviteArgs> msg, long currentQQ);
 
         /// <summary>
-        /// 有人成功加入群【加群申请被同意】
+        /// 有人成功加入群【加群申请被同意】[机器人需要是管理员]
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="currentQQ"></param>

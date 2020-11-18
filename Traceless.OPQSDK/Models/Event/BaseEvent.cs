@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Traceless.OPQSDK.Models.Event
 {
@@ -45,7 +46,7 @@ namespace Traceless.OPQSDK.Models.Event
             BaseEvent<E> res=new BaseEvent<E>();
             res.EventMsg = this.EventMsg;
             res.EventName = this.EventName;
-            res.EventData = (E) (object) this.EventData;
+            res.EventData = JsonConvert.DeserializeObject<E>(EventData.ToString()!);
             return res;
 
         }
