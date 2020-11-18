@@ -9,7 +9,7 @@
     <PackageDescription>OPQ Sdk For Netcore，Part Of Socket</PackageDescription>
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
     <LangVersion>9</LangVersion>
-    <TargetFrameworks>netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
