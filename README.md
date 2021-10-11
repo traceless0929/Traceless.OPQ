@@ -1,8 +1,6 @@
 # Traceless.OPQ
 OPQ C# SDK 【netcore 3.1】
 
-# 由于本人转至go-cqhttp Mirai生态，本SDK目前处于缓慢维护和更新状态，有兴趣的朋友可以联系我接盘 或者直接fork并修改出自己的版本，品质优秀的话，本库会在Readme中进行推荐和引流方便开发者找到最新的SDK
-
 
 这里是Netcore 3.1 OPQ C# SDK
 
