@@ -48,21 +48,25 @@ namespace Traceless.Robot.Plugins
         {
             Console.WriteLine($"GroupMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
             if (msg.FromGroupId != 516141713) return 0;
-            if (msg.MsgType == MsgType.PicMsg)
+            switch (msg.MsgType)
             {
-                var picContent = msg.GetPic();
-                Apis.SendGroupMsg(msg.FromGroupId,
-                    picContent.Content + CodeUtils.At(msg.FromUserId) +
-                    CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
-            }
-            else if (msg.MsgType == MsgType.VoiceMsg)
-            {
-                var voiceContent = msg.GetVoice();
-                Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
-            }
-            else
-            {
-                Apis.SendGroupMsg(msg.FromGroupId, msg.Content + CodeUtils.At(msg.FromUserId));
+                case MsgType.PicMsg:
+                {
+                    var picContent = msg.GetPic();
+                    Apis.SendGroupMsg(msg.FromGroupId,
+                        picContent.Content + CodeUtils.At(msg.FromUserId) +
+                        CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
+                    break;
+                }
+                case MsgType.VoiceMsg:
+                {
+                    var voiceContent = msg.GetVoice();
+                    Apis.SendGroupMsg(msg.FromGroupId, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
+                    break;
+                }
+                default:
+                    Apis.SendGroupMsg(msg.FromGroupId, msg.Content + CodeUtils.At(msg.FromUserId));
+                    break;
             }
 
             Apis.RevokeMsg(new RevokeMsgReq
@@ -78,20 +82,24 @@ namespace Traceless.Robot.Plugins
         public override int FriendMsgProcess(FriendMsg msg, long CurrentQQ)
         {
             Console.WriteLine($"FriendMsgProcess {CurrentQQ}\n" + JsonConvert.SerializeObject(msg));
-            if (msg.MsgType == MsgType.PicMsg)
+            switch (msg.MsgType)
             {
-                var picContent = msg.GetPic();
-                Apis.SendFriendMsg(msg.FromUin,
-                    picContent.Content + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
-            }
-            else if (msg.MsgType == MsgType.VoiceMsg)
-            {
-                var voiceContent = msg.GetVoice();
-                Apis.SendFriendMsg(msg.FromUin, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
-            }
-            else
-            {
-                Apis.SendFriendMsg(msg.FromUin, msg.Content);
+                case MsgType.PicMsg:
+                {
+                    var picContent = msg.GetPic();
+                    Apis.SendFriendMsg(msg.FromUin,
+                        picContent.Content + CodeUtils.Pic_Http(picContent.FriendPic.FirstOrDefault().Url));
+                    break;
+                }
+                case MsgType.VoiceMsg:
+                {
+                    var voiceContent = msg.GetVoice();
+                    Apis.SendFriendMsg(msg.FromUin, voiceContent.Content + CodeUtils.Voice_Http(voiceContent.Url));
+                    break;
+                }
+                default:
+                    Apis.SendFriendMsg(msg.FromUin, msg.Content);
+                    break;
             }
 
             return 0;

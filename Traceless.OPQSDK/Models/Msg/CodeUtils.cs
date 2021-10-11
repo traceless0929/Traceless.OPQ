@@ -137,15 +137,15 @@ namespace Traceless.OPQSDK.Models.Msg
         public static List<string> GetRegexStr(string reString, string regexCode)
         {
             //注意 reString 请替换为需要处理的字符串
-            List<string> strList = new List<string>();
+            var strList = new List<string>();
             var reg = new Regex(regexCode);
-            MatchCollection mc = reg.Matches(reString);
-            for (int i = 0; i < mc.Count; i++)
+            var mc = reg.Matches(reString);
+            for (var i = 0; i < mc.Count; i++)
             {
-                GroupCollection gc = mc[i].Groups; //得到所有分组
-                for (int j = 1; j < gc.Count; j++) //多分组 匹配的原始文本不要
+                var gc = mc[i].Groups; //得到所有分组
+                for (var j = 1; j < gc.Count; j++) //多分组 匹配的原始文本不要
                 {
-                    string temp = gc[j].Value;
+                    var temp = gc[j].Value;
                     if (!string.IsNullOrEmpty(temp))
                     {
                         strList.Add(temp); //获取结果   strList中为匹配的值
@@ -168,8 +168,8 @@ namespace Traceless.OPQSDK.Models.Msg
                 return string.Empty;
             }
 
-            FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
-            DescriptionAttribute attribute = fieldInfo.GetCustomAttribute<DescriptionAttribute>(false);
+            var fieldInfo = value.GetType().GetField(value.ToString());
+            var attribute = fieldInfo.GetCustomAttribute<DescriptionAttribute>(false);
             return attribute.Description;
         }
     }

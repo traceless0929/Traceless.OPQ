@@ -1,5 +1,5 @@
 # Traceless.OPQ
-OPQ C# SDK 【netcore 3.1】
+OPQ C# SDK 【netcore 3.1/.net 5】
 
 
 这里是Netcore 3.1 OPQ C# SDK

@@ -14,9 +14,6 @@ namespace Traceless.OPQSDK.Models.Content
         /// </summary>
         public List<long> UserID { get; set; } = new List<long>();
 
-        public List<OPQCode> Codes
-        {
-            get { return CodeUtils.ParseOPQCode(Content); }
-        }
+        public List<OPQCode> Codes => Content.ParseOPQCode();
     }
 }

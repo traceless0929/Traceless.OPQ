@@ -58,12 +58,10 @@ namespace Traceless.OPQSDK
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
-            SendMsgReq req = new SendMsgReq() { ToUserUid = groupId, SendMsgType = "TextMsg", SendToType = 2, Content = (txt == null ? "" : txt) };
-            if (null != json)
-            {
-                req.SendMsgType = "JsonMsg";
-                req.Content = JsonConvert.SerializeObject(json);
-            }
+            var req = new SendMsgReq() { ToUserUid = groupId, SendMsgType = "TextMsg", SendToType = 2, Content = (txt == null ? "" : txt) };
+            if (null == json) return SendMsg(req, changeCode);
+            req.SendMsgType = "JsonMsg";
+            req.Content = JsonConvert.SerializeObject(json);
             return SendMsg(req, changeCode);
         }
 
@@ -81,12 +79,10 @@ namespace Traceless.OPQSDK
             {
                 return new MsgResp() { Ret = 1, Msg = "消息为空" };
             }
-            SendMsgReq req = new SendMsgReq() { ToUserUid = qq, SendMsgType = "TextMsg", SendToType = 1, Content = (txt == null ? "" : txt) };
-            if (null != json)
-            {
-                req.SendMsgType = "JsonMsg";
-                req.Content = JsonConvert.SerializeObject(json);
-            }
+            var req = new SendMsgReq() { ToUserUid = qq, SendMsgType = "TextMsg", SendToType = 1, Content = (txt == null ? "" : txt) };
+            if (null == json) return SendMsg(req, changeCode);
+            req.SendMsgType = "JsonMsg";
+            req.Content = JsonConvert.SerializeObject(json);
             return SendMsg(req, changeCode);
         }
 
@@ -116,9 +112,9 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static List<Friendlist> GetQQFriendList()
         {
-            List<Friendlist> res = new List<Friendlist>();
-            FriendListReq req = new FriendListReq();
-            FriendListResp friend = new FriendListResp();
+            var res = new List<Friendlist>();
+            var req = new FriendListReq();
+            var friend = new FriendListResp();
             do
             {
                 friend = HttpUtils.Post<FriendListResp>(_ApiAddress + "&funcname=friendlist.GetFriendListReq", req);
@@ -136,16 +132,13 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static List<GroupInfo> GetGroupList()
         {
-            GroupListReq req = new GroupListReq();
-            List<GroupInfo> res = new List<GroupInfo>();
-            GroupListResp group = new GroupListResp();
+            var req = new GroupListReq();
+            var res = new List<GroupInfo>();
+            var group = new GroupListResp();
             do
             {
-                group = HttpUtils.Post<GroupListResp>(_ApiAddress + "&funcname=friendlist.GetTroopListReqV2", req);
-                if (null == group)
-                {
-                    group = new GroupListResp();
-                }
+                group = HttpUtils.Post<GroupListResp>(_ApiAddress + "&funcname=friendlist.GetTroopListReqV2", req) ??
+                        new GroupListResp();
                 if (group.TroopList != null && group.TroopList.Count > 0)
                 {
                     res.AddRange(group.TroopList.GroupBy(p => p.GroupId).Select(p => p.First()).ToList());
@@ -163,16 +156,13 @@ namespace Traceless.OPQSDK
         /// <returns></returns>
         public static List<GMemberInfo> GetGroupUserList(long gid)
         {
-            GroupUserListReq req = new GroupUserListReq() { GroupUin = gid };
-            List<GMemberInfo> res = new List<GMemberInfo>();
-            GroupUserListResp group = new GroupUserListResp();
+            var req = new GroupUserListReq() { GroupUin = gid };
+            var res = new List<GMemberInfo>();
+            var group = new GroupUserListResp();
             do
             {
-                group = HttpUtils.Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req);
-                if (null == group)
-                {
-                    group = new GroupUserListResp();
-                }
+                group = HttpUtils.Post<GroupUserListResp>(_ApiAddress + "&funcname=friendlist.GetTroopMemberListReq", req) ??
+                        new GroupUserListResp();
                 if (group.MemberList.Count > 0)
                 {
                     res.AddRange(group.MemberList);
@@ -306,7 +296,7 @@ namespace Traceless.OPQSDK
                 return new MsgResp() { Ret = 1 };
             }
             Console.WriteLine($"[log]{(req.SendToType == 1 ? "好友" : (req.SendToType == 2 ? "群聊" : "私聊"))}给{req.ToUserUid}->{req.Content}");
-            List<OPQCode> codes = OPQCode.Parse(req.Content);
+            var codes = OPQCode.Parse(req.Content);
             if (changeCode)
             {
                 if (string.IsNullOrEmpty(req.PicUrl))
@@ -337,8 +327,8 @@ namespace Traceless.OPQSDK
                     });
             }
             Console.WriteLine($"[DEBUG]{JsonConvert.SerializeObject(req)}");
-            MsgResp msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
-            int i = 0;
+            var msg = HttpUtils.Post<MsgResp>(_ApiAddress + "&funcname=SendMsgV2", req);
+            var i = 0;
             while (msg.Ret == 241 && i < 10)
             {
                 Console.WriteLine($"[WARN]API等待{JsonConvert.SerializeObject(req)}");

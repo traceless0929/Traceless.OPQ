@@ -34,8 +34,8 @@ namespace Traceless.OPQSDK.Plugin
             foreach (var assembly in Assembly.GetEntryAssembly().GetTypes().Where(p => p.BaseType.IsAbstract && p.BaseType.Name == "BasePlugin")
                 .OrderBy(p => ((BasePlugin)Activator.CreateInstance(p)).PluginPriority))
             {
-                object obj = Activator.CreateInstance(assembly);
-                BasePlugin basePlugin = (BasePlugin)obj;
+                var obj = Activator.CreateInstance(assembly);
+                var basePlugin = (BasePlugin)obj;
                 _instanceBag.Add(basePlugin);
                 Console.WriteLine($"找到插件{assembly.Name}\n[{basePlugin.AppId}({basePlugin.pluginName})]\n优先级:{basePlugin.PluginPriority}\n作者：{basePlugin.pluginAuthor}\n描述：{basePlugin.PluginDescription}");
                 Console.WriteLine($"-------------------------------------");
@@ -49,7 +49,7 @@ namespace Traceless.OPQSDK.Plugin
                 socket.Emit("GetWebConn", System.Configuration.ConfigurationManager.AppSettings["robotqq"], null, async (callback) =>
                 {
                     var jsonMsg = callback as string;
-                    Console.WriteLine(string.Format("callback [root].[messageAck]: {0} \r\n", jsonMsg));
+                    Console.WriteLine($"callback [root].[messageAck]: {jsonMsg} \r\n");
                     if (!jsonMsg.Contains("OK"))
                     {
                         //处理有些时候掉线收不到某些消息的问题，重新连接可以解决
@@ -59,14 +59,14 @@ namespace Traceless.OPQSDK.Plugin
                     }
                     else
                     {
-                        string masterQQ = System.Configuration.ConfigurationManager.AppSettings["masterqq"];
-                        if (null == masterQQ || masterQQ.Length < 1)
+                        var masterQq = System.Configuration.ConfigurationManager.AppSettings["masterqq"];
+                        if (string.IsNullOrEmpty(masterQq))
                         {
                             Console.WriteLine(string.Format("没有配置主人QQ，不发送成功启动通知"));
                         }
                         else
                         {
-                            Apis.SendFriendMsg(Convert.ToInt64(masterQQ), $"启动成功..");
+                            Apis.SendFriendMsg(Convert.ToInt64(masterQq), $"启动成功..");
                             foreach (var instance in _instanceBag)
                             {
                                 instance.PluginInit(Convert.ToInt64(System.Configuration.ConfigurationManager.AppSettings["robotqq"]));
@@ -90,7 +90,7 @@ namespace Traceless.OPQSDK.Plugin
             {
                 Task.Run(() =>
                  {
-                     BaseData<GroupMsg> baseData = JsonConvert.DeserializeObject<BaseData<GroupMsg>>(((JSONMessage)fn).MessageText);
+                     var baseData = JsonConvert.DeserializeObject<BaseData<GroupMsg>>(((JSONMessage)fn).MessageText);
                      if (baseData.CurrentPacket.Data.FromUserId == baseData.CurrentQQ)
                      {
                          //自己的消息不处理
@@ -99,7 +99,7 @@ namespace Traceless.OPQSDK.Plugin
                      try
                      {
                          //拦截标记，0不拦截 1拦截
-                         int stopFlag = 0;
+                         var stopFlag = 0;
                          foreach (var instance in _instanceBag)
                          {
                              stopFlag = instance.GroupMsgProcess(baseData.CurrentPacket.Data, baseData.CurrentQQ);
@@ -120,7 +120,7 @@ namespace Traceless.OPQSDK.Plugin
             {
                 Task.Run(() =>
                     {
-                        BaseData<FriendMsg> baseData = JsonConvert.DeserializeObject<BaseData<FriendMsg>>(((JSONMessage)fn).MessageText);
+                        var baseData = JsonConvert.DeserializeObject<BaseData<FriendMsg>>(((JSONMessage)fn).MessageText);
                         if (baseData.CurrentPacket.Data.FromUin == baseData.CurrentQQ)
                         {
                             //自己的消息不处理
@@ -129,7 +129,7 @@ namespace Traceless.OPQSDK.Plugin
                         try
                         {
                             //拦截标记，0不拦截 1拦截
-                            int stopFlag = 0;
+                            var stopFlag = 0;
                             foreach (var instance in _instanceBag)
                             {
                                 stopFlag = instance.FriendMsgProcess(baseData.CurrentPacket.Data, baseData.CurrentQQ);
@@ -149,11 +149,11 @@ namespace Traceless.OPQSDK.Plugin
             //统一事件管理如好友进群事件 好友请求事件 退群等事件集合
             socket.On("OnEvents", (fn) =>
             {
+                var msgText = ((JSONMessage)fn).MessageText;
+                var baseData = JsonConvert.DeserializeObject<BaseData<BaseEvent<object>>>(msgText);
                 Task.Run(() =>
                     {
-                        string msgText = ((JSONMessage)fn).MessageText;
                         Console.WriteLine("OnEnevts\n" + msgText);
-                        BaseData<BaseEvent<object>> baseData = JsonConvert.DeserializeObject<BaseData<BaseEvent<object>>>(msgText);
                         try
                         {
                             foreach (var instance in _instanceBag)

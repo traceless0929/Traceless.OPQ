@@ -11,10 +11,10 @@
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
     <PackageVersion>0.0.30</PackageVersion>
     <LangVersion>8</LangVersion>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Title>Traceless.OPQSDK</Title>
     <Copyright>Traceless</Copyright>
     <PackageProjectUrl>https://github.com/traceless0929/Traceless.OPQ</PackageProjectUrl>
+    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

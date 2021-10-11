@@ -15,11 +15,7 @@ namespace Traceless.OPQSDK.Models.Content
         /// <returns></returns>
         public PicContent GetPic()
         {
-            if (this.Tips.Contains("图片"))
-            {
-                return GetMsg<PicContent>();
-            }
-            return null;
+            return this.Tips.Contains("图片") ? GetMsg<PicContent>() : null;
         }
 
         /// <summary>
@@ -28,11 +24,7 @@ namespace Traceless.OPQSDK.Models.Content
         /// <returns></returns>
         public VoiceContent GetVoice()
         {
-            if (this.Tips.Contains("语音"))
-            {
-                return GetMsg<VoiceContent>();
-            }
-            return null;
+            return this.Tips.Contains("语音") ? GetMsg<VoiceContent>() : null;
         }
 
         /// <summary>
@@ -41,11 +33,7 @@ namespace Traceless.OPQSDK.Models.Content
         /// <returns></returns>
         public BigFaceContent GetBigFace()
         {
-            if (this.Tips.Contains("大表情"))
-            {
-                return GetMsg<BigFaceContent>();
-            }
-            return null;
+            return this.Tips.Contains("大表情") ? GetMsg<BigFaceContent>() : null;
         }
     }
 }
