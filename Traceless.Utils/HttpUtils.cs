@@ -22,13 +22,10 @@ namespace Traceless.Utils
         /// <returns></returns>
         public static T Post<T>(string url, object data, string contentType = "application/json") where T : class
         {
-            Task<HttpResponseMessage> responseMessage = PostAsync(url, JsonConvert.SerializeObject(data), contentType);
-            if (responseMessage.Result.IsSuccessStatusCode)
-            {
-                Task<string> t = responseMessage.Result.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<T>(t.Result);
-            }
-            return default(T);
+            var responseMessage = PostAsync(url, JsonConvert.SerializeObject(data), contentType);
+            if (!responseMessage.Result.IsSuccessStatusCode) return default(T);
+            var t = responseMessage.Result.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(t.Result);
         }
 
         /// <summary>
@@ -37,10 +34,10 @@ namespace Traceless.Utils
         private static string GetUpperEncode(string encode)
         {
             var result = new StringBuilder();
-            int index = int.MinValue;
-            for (int i = 0; i < encode.Length; i++)
+            var index = int.MinValue;
+            for (var i = 0; i < encode.Length; i++)
             {
-                string character = encode[i].ToString();
+                var character = encode[i].ToString();
                 if (character == "%")
                     index = i;
                 if (i - index == 1 || i - index == 2)
@@ -58,13 +55,10 @@ namespace Traceless.Utils
         /// <returns></returns>
         public static T Get<T>(string url) where T : class
         {
-            Task<HttpResponseMessage> responseMessage = GetAsync(url);
-            if (responseMessage.Result.IsSuccessStatusCode)
-            {
-                Task<string> t = responseMessage.Result.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<T>(t.Result);
-            }
-            return default(T);
+            var responseMessage = GetAsync(url);
+            if (!responseMessage.Result.IsSuccessStatusCode) return default(T);
+            var t = responseMessage.Result.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(t.Result);
         }
 
         public async static Task<HttpResponseMessage> PostAsync(string url, string postStr, string contentType = "application/json")
@@ -89,9 +83,7 @@ namespace Traceless.Utils
 		public static string UrlEncode(string url, bool isUpper = false)
         {
             var result = HttpUtility.UrlEncode(url);
-            if (!isUpper)
-                return result;
-            return GetUpperEncode(result);
+            return !isUpper ? result : GetUpperEncode(result);
         }
 
         /// <summary>
@@ -103,9 +95,7 @@ namespace Traceless.Utils
         public static string UrlEncode(string url, Encoding encoding, bool isUpper = false)
         {
             var result = HttpUtility.UrlEncode(url, encoding);
-            if (!isUpper)
-                return result;
-            return GetUpperEncode(result);
+            return !isUpper ? result : GetUpperEncode(result);
         }
 
         /// <summary>
@@ -137,14 +127,14 @@ namespace Traceless.Utils
         /// <returns></returns>
         public static string MD5(string s, int len = 32)
         {
-            string result = "";
+            var result = "";
 
             var md5Hasher = new MD5CryptoServiceProvider();
-            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(s));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
+            var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(s));
+            var sb = new StringBuilder();
+            foreach (var t in data)
             {
-                sb.Append(data[i].ToString("x2"));
+                sb.Append(t.ToString("x2"));
             }
             result = sb.ToString();
 
@@ -158,14 +148,12 @@ namespace Traceless.Utils
         /// <returns></returns>
         public static string EnUnicode(string str)
         {
-            StringBuilder strResult = new StringBuilder();
-            if (!string.IsNullOrEmpty(str))
+            var strResult = new StringBuilder();
+            if (string.IsNullOrEmpty(str)) return strResult.ToString();
+            foreach (var t in str)
             {
-                for (int i = 0; i < str.Length; i++)
-                {
-                    strResult.Append("\\u");
-                    strResult.Append(((int)str[i]).ToString("x"));
-                }
+                strResult.Append("\\u");
+                strResult.Append(((int)t).ToString("x"));
             }
             return strResult.ToString();
         }
@@ -178,8 +166,8 @@ namespace Traceless.Utils
         public static string DeUnicode(string str)
         {
             //最直接的方法Regex.Unescape(str);
-            Regex reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
-            return reg.Replace(str, delegate (Match m) { return ((char)Convert.ToInt32(m.Groups[1].Value, 16)).ToString(); });
+            var reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
+            return reg.Replace(str, m => ((char)Convert.ToInt32(m.Groups[1].Value, 16)).ToString());
         }
     }
 }

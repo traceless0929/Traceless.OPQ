@@ -14,7 +14,7 @@
     <Title>Traceless.OPQSDK</Title>
     <Copyright>Traceless</Copyright>
     <PackageProjectUrl>https://github.com/traceless0929/Traceless.OPQ</PackageProjectUrl>
-    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

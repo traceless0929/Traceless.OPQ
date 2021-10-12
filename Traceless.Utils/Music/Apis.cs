@@ -14,18 +14,15 @@ namespace Traceless.Utils.Music
 
         public static QQMusicResp QMusic(string keyword)
         {
-            Task<HttpResponseMessage> responseMessage = HttpUtils.GetAsync(qmusic + HttpUtils.UrlEncode(keyword));
-            if (responseMessage.Result.IsSuccessStatusCode)
+            var responseMessage = HttpUtils.GetAsync(qmusic + HttpUtils.UrlEncode(keyword));
+            if (!responseMessage.Result.IsSuccessStatusCode) return null;
+            var resp = responseMessage.Result.Content.ReadAsStringAsync().Result;
+            if (resp.Contains("no results"))
             {
-                string resp = responseMessage.Result.Content.ReadAsStringAsync().Result;
-                if (resp.Contains("no results"))
-                {
-                    return null;
-                }
-                resp = resp.Substring(9, resp.Length - 10);
-                return JsonConvert.DeserializeObject<QQMusicResp>(resp);
+                return null;
             }
-            return null;
+            resp = resp.Substring(9, resp.Length - 10);
+            return JsonConvert.DeserializeObject<QQMusicResp>(resp);
         }
     }
 }

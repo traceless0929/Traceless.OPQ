@@ -42,7 +42,7 @@ namespace Traceless.Utils.Ai.Tencent
         /// <returns></returns>
         public static BaseResp<Nlp_TextChatResp> Chat(string session, string ask)
         {
-            Nlp_TextChatRequest req = new Nlp_TextChatRequest
+            var req = new Nlp_TextChatRequest
             {
                 session = session,
                 question = ask
@@ -61,7 +61,7 @@ namespace Traceless.Utils.Ai.Tencent
         /// <returns></returns>
         public static BaseResp<Aai_TtsResp> Tts(string text, int speaker = 7, int speed = 100, int format = 2)
         {
-            Aai_TtsRequest req = new Aai_TtsRequest
+            var req = new Aai_TtsRequest
             {
                 text = text,
                 speaker = speaker,

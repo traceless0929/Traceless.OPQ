@@ -24,11 +24,9 @@ namespace Traceless.Utils.Http
 
         public IT CreateHttpClient()
         {
-            using (var serviceScope = _host.Services.CreateScope())
-            {
-                var service = serviceScope.ServiceProvider;
-                return service.GetRequiredService<IT>();
-            }
+            using var serviceScope = _host.Services.CreateScope();
+            var service = serviceScope.ServiceProvider;
+            return service.GetRequiredService<IT>();
         }
     }
 }

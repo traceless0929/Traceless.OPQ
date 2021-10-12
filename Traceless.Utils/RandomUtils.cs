@@ -8,17 +8,16 @@ namespace Traceless.Utils
     {
         private static int GetRandomSeed()
         {
-            byte[] bytes = new byte[4];
-            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            var bytes = new byte[4];
+            var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
             rng.GetBytes(bytes);
             return BitConverter.ToInt32(bytes, 0);
         }
 
         public static int RandomGet(int min, int max)
         {
-            long tick = DateTime.Now.Millisecond;
-            Random rd = new Random(GetRandomSeed());
-            int r = rd.Next(min, max);
+            var rd = new Random(GetRandomSeed());
+            var r = rd.Next(min, max);
             return r;
         }
 
@@ -29,12 +28,10 @@ namespace Traceless.Utils
         /// <returns>true：中 false：不中</returns>
         public static bool RandomGet(int cen)
         {
-            long tick = DateTime.Now.Millisecond;
-            Random rd = new Random(GetRandomSeed());
-            int r = rd.Next(0, 10000);
+            var rd = new Random(GetRandomSeed());
+            var r = rd.Next(0, 10000);
             if (cen < 0) return true;
-            if (r < cen) return true;
-            else return false;
+            return r < cen;
         }
     }
 }
