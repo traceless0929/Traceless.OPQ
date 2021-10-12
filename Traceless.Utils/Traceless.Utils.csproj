@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/traceless0929/Traceless.OPQ</RepositoryUrl>
     <LangVersion>8</LangVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageVersion>0.0.10</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
